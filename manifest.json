@@ -1,0 +1,48 @@
+﻿{
+  "manifest_version": 2,
+
+  "name": "TeamCity Agent Monitor",
+  "short_name" : "TC AgentMon",
+  "description": "TeamCity agent status displayed in a big screen dashboard format",
+  "version": "0.1",
+
+  "author" : "Jamie Holdstock", 
+
+  "permissions": [
+    "storage",
+    "tabs",
+    "http://*/",
+    "https://*/",
+    "background"
+  ],
+  
+  "options_ui": {
+    "page": "html/options.html",
+    "chrome_style": true,
+    "open_in_tab": false
+  },
+
+  "options_page": "html/options.html",
+
+  "icons": {
+  	 "16": "icon/16x16.png",
+		 "24": "icon/24x24.png",
+		 "32": "icon/32x32.png",
+		 "48": "icon/48x48.png",
+		 "64": "icon/64x64.png",
+		 "96": "icon/96x96.png",
+		"128": "icon/128x128.png"
+  },
+
+  "browser_action": {
+  	"default_icon": {                    
+    	"19": "icon/24x24.png",           
+  		"38": "icon/48x48.png"            
+	  },
+    "default_title": "Open TeamCity Agent Monitor"
+  },
+
+  "background": {
+    "scripts": ["js/background.js"]
+  }
+}
