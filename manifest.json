@@ -15,14 +15,6 @@
     "https://*/",
     "background"
   ],
-  
-  "options_ui": {
-    "page": "html/options.html",
-    "chrome_style": true,
-    "open_in_tab": false
-  },
-
-  "options_page": "html/options.html",
 
   "icons": {
   	 "16": "icon/16x16.png",
