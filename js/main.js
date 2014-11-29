@@ -1,7 +1,8 @@
+var body = $("body");
+body.empty();
+$("<div>").addClass("tsm_wrapper").appendTo(body);
+
 chrome.runtime.sendMessage({}, function(response) {
-  var body = $("body");
-  body.empty();
-  
   var h = $.get("http://lon1vci01.int.openbet.com/agents.html", null, function(data){
     var agents = [];
     data = $(data);
@@ -14,12 +15,12 @@ chrome.runtime.sendMessage({}, function(response) {
     });
 
     $.each(agents, function(index, agent) {
-      var bgElement = $("<div>");
-      var name = $("<div>").html(agent.name);
-      var enabled = $("<div>").html(agent.enabled);
+      var bgElement = $("<div>").addClass("tsm_green");
+      var name = $("<div>").html(agent.name).addClass("tsm_topLeft");
+      var enabled = $("<div>").html(agent.enabled).addClass("tsm_bottomLeft");
 
       bgElement.append(name).append(enabled);
-      $("body").append(bgElement);
+      $("div.tsm_wrapper").append(bgElement);
     }); 
   });
 
@@ -35,13 +36,13 @@ chrome.runtime.sendMessage({}, function(response) {
     });
 
     $.each(disconnectedAgents, function(index, agent) {
-      var bgElement = $("<div>");
-      var name = $("<div>").html(agent.name);
-      var enabled = $("<div>").html(agent.enabled);
-      var disconnectTime = $("<div>").html(agent.disconnectTime);
+      var bgElement = $("<div>").addClass("tsm_orange");
+      var name = $("<div>").html(agent.name).addClass("tsm_topLeft");
+      var enabled = $("<div>").html(agent.enabled).addClass("tsm_bottomLeft");
+      var disconnectTime = $("<div>").html(agent.disconnectTime).addClass("tsm_topRight");
 
       bgElement.append(name).append(enabled).append(disconnectTime);
-      $("body").append(bgElement);
+      $("div.tsm_wrapper").append(bgElement);
     });
   
   });

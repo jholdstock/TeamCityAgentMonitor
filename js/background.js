@@ -12,5 +12,6 @@ chrome.browserAction.onClicked.addListener(function() {
   
   chrome.tabs.executeScript(null, {file: "vendor/jquery-1.11.1.min.js"});
   chrome.tabs.executeScript(null, {file: "js/main.js"});
+	chrome.tabs.insertCSS(null, {file: "css/main.css"});
   
 });
