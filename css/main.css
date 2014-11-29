@@ -6,7 +6,6 @@ body {
 
 body, .tsm_wrapper {
   color           : white;
-  height          : 100%;
   width           : 100%;
   background-color: black;
   margin          : 0;
@@ -15,23 +14,23 @@ body, .tsm_wrapper {
 
 .tsm_wrapper {
   display         : flex;
-  flex-direction  : column;  
+  flex-direction  : row;  
 }
 
 /*
      Background divs
 */
-.tsm_green, .tsm_red, .tsm_orange {
+.tsm_green, .tsm_red, .tsm_orange, .tsm_gray {
   flex         : 1;
   box-sizing   : border-box;
   padding      : 10px;
-  margin       : 8px 16px;
+  margin       : 16px 8px;
   font-weight  : 300;
   position     : relative;
   border-radius: 10px;  
 }
-.tsm_box:first-of-type { margin-top: 16px; }
-.tsm_box:last-of-type  { margin-bottom: 16px; }
+.tsm_box:first-of-type { margin-left: 16px; }
+.tsm_box:last-of-type  { margin-right: 16px; }
 
 .tsm_green {
   background-color: #4cab4c;
@@ -42,7 +41,11 @@ body, .tsm_wrapper {
 }
 
 .tsm_orange {
-	background-color: #e67e22;
+  background-color: #e67e22;
+}
+
+.tsm_gray {
+  background-color: gray;
 }
 
 /*
