@@ -19,6 +19,7 @@ body, .tsm_agent_wrapper, .tsm_build_wrapper {
 
 .tsm_build_wrapper {
   display         : flex;
+  height: 70%;
   flex-direction  : column;  
 }
 /*
