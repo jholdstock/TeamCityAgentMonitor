@@ -47,28 +47,30 @@ var agentIdCallback = function(response) {
   }
 }
 
-var drawBuild = function(response) {
-  var build = response.build[0];
-  if (build.status != "SUCCESS") {
-    var bgElement = $("<div>").attr("id", "tsm_b_" + build.id);
-    var name = $("<div>").addClass("tsm_topLeft");
-    var status = $("<div>").addClass("tsm_topRight");
-    bgElement.append(name).append(status);
-    $("div.tsm_build_wrapper").append(bgElement);
-    name.html(build.buildTypeId);
-    status.html(build.status);
-    bgElement.removeClass().addClass("tsm_red");
-  }
+var drawBuild = function(buildType) {
+  return function(response) {
+    var build = response.build[0];
+    if (build.status != "SUCCESS") {
+      var bgElement = $("<div>").attr("id", "tsm_b_" + build.id);
+      var name = $("<div>").addClass("tsm_topLeft");
+      var status = $("<div>").addClass("tsm_topRight");
+      bgElement.append(name).append(status);
+      $("div.tsm_build_wrapper").append(bgElement);
+      name.html(buildType.projectName + " :: " + buildType.name);
+      status.html(build.status);
+      bgElement.removeClass().addClass("tsm_red");
+    }
+  };
 }
 
 var buildTypesCallback = function(response) {
   var buildTypes = response.buildType;
-  
+  console.log(response);
   for (var i = 0; i < buildTypes.length; i++) {
     $.ajax({
-      url: tcUrl + "/httpAuth/app/rest/builds/?locator=count:1,buildType:id:" + buildTypes[i].id,
+      url: tcUrl + "/httpAuth/app/rest/builds/?locator=count:1,canceled:false,running:false,buildType:id:" + buildTypes[i].id,
       headers: { Accept:"application/json" },
-      success: drawBuild
+      success: drawBuild(buildTypes[i])
     });
   }
 }
