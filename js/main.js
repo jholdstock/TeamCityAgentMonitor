@@ -38,17 +38,43 @@ var drawAgent = function(agent) {
 var agentIdCallback = function(response) {
   var agentIds = response.agent;
 
-  for (var i = 0; i< agentIds.length; i++) {
-    var agentId = agentIds[i].id;
+  for (var i = 0; i < agentIds.length; i++) {
     $.ajax({
-      url: tcUrl + "/httpAuth/app/rest/agents/id:" + agentId + "",
+      url: tcUrl + agentIds[i].href,
       headers: { Accept:"application/json" },
       success: drawAgent
     });
   }
 }
 
-var downloadAndDisplayAgents = function(url) {
+var drawBuild = function(response) {
+  if (response.build[0].status != "SUCCESS") {
+    console.log(response.build[0].buildTypeId + " == " + response.build[0].status);
+  }
+}
+
+var buildTypesCallback = function(response) {
+  var buildTypes = response.buildType;
+  
+  for (var i = 0; i < buildTypes.length; i++) {
+    $.ajax({
+      url: tcUrl + "/httpAuth/app/rest/builds/?locator=count:1,buildType:id:" + buildTypes[i].id,
+      headers: { Accept:"application/json" },
+      success: drawBuild
+    });
+  }
+}
+
+var downloadAndDisplayBuilds = function() {
+  $.ajax({
+    url: tcUrl + "/httpAuth/app/rest/buildTypes",
+    headers: { Accept:"application/json" },
+    success: buildTypesCallback
+  });
+  //setTimeout(downloadAndDisplayBuilds, 2000);
+}
+
+var downloadAndDisplayAgents = function() {
   $.ajax({
     url: tcUrl + "/httpAuth/app/rest/agents",
     headers: { Accept:"application/json" },
@@ -64,4 +90,5 @@ $("<div>").addClass("tsm_wrapper").appendTo(body);
 
 chrome.runtime.sendMessage({}, function(response) {
   downloadAndDisplayAgents();
+  downloadAndDisplayBuilds();
 });
