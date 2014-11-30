@@ -30,7 +30,7 @@ body, .tsm_agent_wrapper, .tsm_build_wrapper {
   flex         : 1;
   box-sizing   : border-box;
   padding      : 10px;
-  margin       : 16px 8px;
+  margin       : 12px 12px;
   font-weight  : 300;
   position     : relative;
   border-radius: 10px;  
@@ -69,7 +69,7 @@ body, .tsm_agent_wrapper, .tsm_build_wrapper {
 }
 
 .tsm_topRight {
-  font-size  : 1.5rem;
+  font-size  : 2.0rem;
   text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
   float      : right;
   text-align : right;
@@ -85,7 +85,7 @@ body, .tsm_agent_wrapper, .tsm_build_wrapper {
 }
 
 .tsm_bottomRight {
-  font-size  : 1.5rem;
+  font-size  : 2.0rem;
   text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
   text-align : right;
   position   : absolute;
