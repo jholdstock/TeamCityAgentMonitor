@@ -2,26 +2,11 @@ var body = $("body");
 body.empty();
 $("<div>").addClass("tsm_wrapper").appendTo(body);
 
-getAgentsFromPage = function(page) {
-  var agents = [];
-  page = $(page);
-
-  var table = $("div#agentsTable tr.agentRow--1", page).each(function(index, row) {
-    var name = $(".buildAgentName a", row).text();
-    var enabled = $(".agentStatus span.agent", row).text();
-    var disconnectTime = $(".lastActivity span.date", row).text();
-    agents.push({name:name, enabled:enabled, disconnectTime:disconnectTime});
-  });
-
-  drawAgents(agents);
-};
-
 drawAgents = function(agents) {
   $.each(agents, function(index, agent) {
     var color;
-    if (!agent.disconnectTime.trim()) {
-      agent.disconnectTime = "Connected";
-      if (agent.enabled == "Enabled") {
+    if (agent.connected) {
+      if (agent.enabled) {
         color = "tsm_green";
       }
       else {
@@ -29,21 +14,44 @@ drawAgents = function(agents) {
       }
     }
     else {
-      agent.disconnectTime = "Disconnected on " + agent.disconnectTime;
       color = "tsm_gray";
     }
 
+    agent.connected = agent.connected? "Connected" : "Disconnected";
+    agent.enabled = agent.enabled? "Enabled" : "Disabled";
+
     var name = $("<div>").html(agent.name).addClass("tsm_topLeft");
+    var connected = $("<div>").html(agent.connected).addClass("tsm_topRight");
     var enabled = $("<div>").html(agent.enabled).addClass("tsm_bottomLeft");
-    var disconnectTime = $("<div>").html(agent.disconnectTime).addClass("tsm_topRight");
 
     var bgElement = $("<div>").addClass(color);
-    bgElement.append(name).append(enabled).append(disconnectTime);
+    bgElement.append(name).append(enabled).append(connected);
     $("div.tsm_wrapper").append(bgElement);
   });
 };
 
 chrome.runtime.sendMessage({}, function(response) {
-  $.get("http://lon1vci01.int.openbet.com/agents.html", null, getAgentsFromPage);
-  $.get("http://lon1vci01.int.openbet.com/agents.html?tab=disconnectedAgents", null, getAgentsFromPage);
+
+  var response = $.ajax({
+    url: "http://lon1vci01.int.openbet.com/httpAuth/app/rest/agents",
+    headers: { Accept:"application/json" },
+    async: false
+  });
+  var agentIds = JSON.parse(response.responseText).agent;
+
+  var agents = [];
+  for (var i = 0; i< agentIds.length; i++) {
+    var agentId = agentIds[i].id;
+
+    var agent = $.ajax({
+      url: "http://lon1vci01.int.openbet.com/httpAuth/app/rest/agents/id:" + agentId + "",
+      headers: { Accept:"application/json" },
+      async: false
+    });
+
+    agent = JSON.parse(agent.responseText);
+    agents.push(agent);
+  }
+  
+  drawAgents(agents);
 });
