@@ -1,26 +1,26 @@
-var drawAgent = function(agent) {
+var agentCallback = function(agent) {
   var color;
   if (agent.connected) {
     if (agent.enabled) color = "tsm_green";
     else color = "tsm_red";
   } else color = "tsm_gray";
 
-  var topLeft = agent.name;
-  var topRight = agent.connected? "Connected" : "Disconnected";
-  var bottomLeft = agent.enabled? "Enabled" : "Disabled";
-  createOrUpdateElement("tsm_a_" + agent.id, $(".tsm_agent_wrapper"), topLeft, topRight, bottomLeft, "", color)
+  var connected = agent.connected? "Connected" : "Disconnected";
+  var enabled = agent.enabled? "Enabled" : "Disabled";
+  var status = connected + "<br>" + enabled;
+  drawAgent(agent.id, agent.name, status, color);
 };
 
-var drawBuild = function(buildType) {
+var buildCallback = function(buildType) {
   return function(build) {
     if (build.status != "SUCCESS") {
-      var topLeft = buildType.projectName + " :: " + buildType.name;
-      var topRight = parseDateString(build.finishDate);
-      var bottomLeft = build.status;
-      createOrUpdateElement("tsm_b_" + buildType.id, $("div.tsm_build_wrapper"), topLeft, topRight, bottomLeft, build.statusText, "tsm_red");
+      var name = buildType.projectName + " :: " + buildType.name;
+      var date = parseDateString(build.finishDate);
+      var status = build.status;
+      drawBuild(buildType.id, name, date, status, build.statusText);     
     }
     else {
-      $("div#tsm_b_" + buildType.id).remove();
+      removeElementIfExists(buildType.id);
     }
   };
 }
@@ -30,7 +30,7 @@ var getBuildDetails = function(buildType) {
     $.ajax({
       url: tcUrl + response.build[0].href,
       headers: { Accept:"application/json" },
-      success: drawBuild(buildType)
+      success: buildCallback(buildType)
     });
   }
 }
@@ -52,7 +52,7 @@ var downloadAndDisplayBuilds = function() {
     headers: { Accept:"application/json" },
     success: buildTypesCallback
   });
-  setTimeout(downloadAndDisplayBuilds, 2000);
+  setTimeout(downloadAndDisplayBuilds, 3000);
 }
 
 var agentIdCallback = function(response) {
@@ -61,7 +61,7 @@ var agentIdCallback = function(response) {
     $.ajax({
       url: tcUrl + agentIds[i].href,
       headers: { Accept:"application/json" },
-      success: drawAgent
+      success: agentCallback
     });
   }
 }
@@ -72,7 +72,7 @@ var downloadAndDisplayAgents = function() {
     headers: { Accept:"application/json" },
     success: agentIdCallback
   });
-  setTimeout(downloadAndDisplayAgents, 2000);
+  setTimeout(downloadAndDisplayAgents, 3000);
 }
 
 var tcUrl;

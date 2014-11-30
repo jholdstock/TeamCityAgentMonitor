@@ -62,42 +62,37 @@ body, .tsm_agent_wrapper, .tsm_build_wrapper {
   margin     : 0.1rem;
 }
 
+.tsm_border {
+  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
+
 .tsm_topLeft {
   font-size  : 2.5rem;
-  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
   float      : left;
 }
 
 .tsm_topRight {
   font-size  : 2.0rem;
-  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
   float      : right;
   text-align : right;
   display    : block;
 }
 
+.tsm_translucent {
+  opacity  : 0.3;
+}
+
 .tsm_bottomLeft {
   font-size: 3.0rem;
   float    : left;
-  opacity  : 0.3;
   position : absolute;
   bottom   : 0;
 }
 
 .tsm_bottomRight {
   font-size  : 2.0rem;
-  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
   text-align : right;
   position   : absolute;
   right      : 1rem;
   bottom     : 0;
-}
-
-.tsm_centre {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  font-size  : 3.5rem;
-  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
