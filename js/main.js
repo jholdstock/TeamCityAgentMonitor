@@ -13,7 +13,7 @@ var drawAgent = function(agent) {
     var connected = $("<div>").addClass("tsm_topRight");
     var enabled = $("<div>").addClass("tsm_bottomLeft");
     bgElement.append(name).append(enabled).append(connected);
-    $("div.tsm_wrapper").append(bgElement);
+    $("div.tsm_agent_wrapper").append(bgElement);
   }
 
   var color;
@@ -48,8 +48,16 @@ var agentIdCallback = function(response) {
 }
 
 var drawBuild = function(response) {
-  if (response.build[0].status != "SUCCESS") {
-    console.log(response.build[0].buildTypeId + " == " + response.build[0].status);
+  var build = response.build[0];
+  if (build.status != "SUCCESS") {
+    var bgElement = $("<div>").attr("id", "tsm_b_" + build.id);
+    var name = $("<div>").addClass("tsm_topLeft");
+    var status = $("<div>").addClass("tsm_topRight");
+    bgElement.append(name).append(status);
+    $("div.tsm_build_wrapper").append(bgElement);
+    name.html(build.buildTypeId);
+    status.html(build.status);
+    bgElement.removeClass().addClass("tsm_red");
   }
 }
 
@@ -86,7 +94,8 @@ var downloadAndDisplayAgents = function() {
 var tcUrl = "http://lon1vci01.int.openbet.com";
 var body = $("body");
 body.empty();
-$("<div>").addClass("tsm_wrapper").appendTo(body);
+$("<div>").addClass("tsm_agent_wrapper").appendTo(body);
+$("<div>").addClass("tsm_build_wrapper").appendTo(body);
 
 chrome.runtime.sendMessage({}, function(response) {
   downloadAndDisplayAgents();

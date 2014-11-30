@@ -4,7 +4,7 @@ body {
   cursor     : default;
 }
 
-body, .tsm_wrapper {
+body, .tsm_agent_wrapper, .tsm_build_wrapper {
   color           : white;
   width           : 100%;
   background-color: black;
@@ -12,11 +12,15 @@ body, .tsm_wrapper {
   padding         : 0;
 }
 
-.tsm_wrapper {
+.tsm_agent_wrapper {
   display         : flex;
   flex-direction  : row;  
 }
 
+.tsm_build_wrapper {
+  display         : flex;
+  flex-direction  : column;  
+}
 /*
      Background divs
 */
