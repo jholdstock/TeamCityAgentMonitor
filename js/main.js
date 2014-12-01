@@ -25,64 +25,54 @@ var buildCallback = function(buildType) {
   };
 }
 
+var ajaxGet = function(url, callback) {
+  $.ajax({
+    url: tcUrl + url,
+    headers: { Accept:"application/json", Authorization: authString },
+    success: callback
+  });
+}
+
 var getBuildDetails = function(buildType) {
   return function(response) {
-    $.ajax({
-      url: tcUrl + response.build[0].href,
-      headers: { Accept:"application/json" },
-      success: buildCallback(buildType)
-    });
+    ajaxGet(response.build[0].href, buildCallback(buildType));
   }
 }
 
 var buildTypesCallback = function(response) {
   var buildTypes = response.buildType;
   for (var i = 0; i < buildTypes.length; i++) {
-    $.ajax({
-      url: tcUrl + "/httpAuth/app/rest/builds/?locator=count:1,canceled:false,running:false,buildType:id:" + buildTypes[i].id,
-      headers: { Accept:"application/json" },
-      success: getBuildDetails(buildTypes[i])
-    });
+    ajaxGet("/httpAuth/app/rest/builds/?locator=count:1,canceled:false,running:false,buildType:id:" + buildTypes[i].id,
+     getBuildDetails(buildTypes[i]));
+  }
+}
+
+var agentIdsCallback = function(response) {
+  var agentIds = response.agent;
+  for (var i = 0; i < agentIds.length; i++) {
+    ajaxGet(agentIds[i].href, agentCallback)
   }
 }
 
 var downloadAndDisplayBuilds = function() {
-  $.ajax({
-    url: tcUrl + "/httpAuth/app/rest/buildTypes",
-    headers: { Accept:"application/json" },
-    success: buildTypesCallback
-  });
+  ajaxGet("/httpAuth/app/rest/buildTypes", buildTypesCallback);
   setTimeout(downloadAndDisplayBuilds, 3000);
 }
 
-var agentIdCallback = function(response) {
-  var agentIds = response.agent;
-  for (var i = 0; i < agentIds.length; i++) {
-    $.ajax({
-      url: tcUrl + agentIds[i].href,
-      headers: { Accept:"application/json" },
-      success: agentCallback
-    });
-  }
-}
-
 var downloadAndDisplayAgents = function() {
-  $.ajax({
-    url: tcUrl + "/httpAuth/app/rest/agents",
-    headers: { Accept:"application/json" },
-    success: agentIdCallback
-  });
+  ajaxGet("/httpAuth/app/rest/agents", agentIdsCallback);
   setTimeout(downloadAndDisplayAgents, 3000);
 }
 
-var tcUrl;
 var body = $("body");
 body.empty();
 $("<div>").addClass("tsm_agent_wrapper").appendTo(body);
 $("<div>").addClass("tsm_build_wrapper").appendTo(body);
 
+var tcUrl, authString;
 chrome.runtime.sendMessage({}, function(response) {
-  tcUrl = "http://lon1vci01.int.openbet.com";
+  tcUrl = response.tcUrl;
+  authString = "Basic " + btoa(response.username+":"+response.password);
   downloadAndDisplayAgents();
   downloadAndDisplayBuilds();
 });
