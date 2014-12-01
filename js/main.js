@@ -69,9 +69,5 @@ body.empty();
 $("<div>").addClass("tsm_agent_wrapper").appendTo(body);
 $("<div>").addClass("tsm_build_wrapper").appendTo(body);
 
-var tcUrl;
-chrome.runtime.sendMessage({}, function(response) {
-  tcUrl = response.tcUrl;
-  downloadAndDisplayAgents();
-  downloadAndDisplayBuilds();
-});
+downloadAndDisplayAgents();
+downloadAndDisplayBuilds();

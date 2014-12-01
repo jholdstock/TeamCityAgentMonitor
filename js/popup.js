@@ -15,11 +15,22 @@ var showServerList = function() {
 
 	$("#serverLinks").empty();
 	for(var i = 0; i < servers.length; i++) {
-		$("<button>").attr("id", "btn_" + i).text(servers[i].url).appendTo($("#serverLinks"));
+		$("<button>")
+			.attr("id", "btn_" + i)
+			.text(servers[i].url)
+			.click(serverButtonClick(servers[i].url))
+			.appendTo($("#serverLinks"));
 		$("#serverLinks").append("&nbsp;&nbsp;");
 	}
 
 	$("#serverList").show();
+}
+
+var serverButtonClick = function(url) {
+	return function() {
+		chrome.extension.getBackgroundPage().openTab(url);
+    exit();
+	};
 }
 
 var showAddServer = function() {
