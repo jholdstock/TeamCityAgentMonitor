@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<style>
+    	body   { min-width: 18rem; }
+    	h2     { font-size: 14px; }
+    	label  { font-size: 12px; }
+  	</style>
+	</head>
+
+	<body>
+
+		<div id="noServers">
+			<p>You currently have no configured TeamCity servers. Would you like to add one?</p>
+			<button id="addFirst">Yes</button>&nbsp;&nbsp;<button id="close">No</button>
+		</div>
+
+		<form id="addServer">
+			<h2>Add server</h2>
+			<label for="url">Server URL:</label>
+			&nbsp;
+			<input required type="text" id="url" />
+			<br /><br />
+			<label for="username">Username:</label>
+			&nbsp;
+			<input required type="text" id="username" />
+			<br /><br />
+			<label for="password">Password:</label>
+			&nbsp;
+			<input required type="password" id="password" />
+			<br /><br />
+			<input type="submit" id="test">&nbsp;&nbsp;<button id="cancel">Cancel</button>&nbsp;<label for"test" id="status"></label>
+			<div id="saveDiv">
+				<br /><br />
+				<button id="save">Save</button>&nbsp;<label for"save" id="status"></label>
+			</div>
+		</form>
+
+		<div id="serverList">
+			<h2>Select Server</h2>
+			<div id="serverLinks"></div>
+			<br />
+			<button id="add">Add New</button>&nbsp;&nbsp;<button id="exit">Cancel</button>
+		</div>
+
+		<script src="../vendor/jquery-1.11.1.min.js"></script>
+		<script src="../js/storage.js"></script>
+		<script src="../js/popup.js"></script>
+	</body>
+</html>
+

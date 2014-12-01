@@ -31,7 +31,8 @@
     	"19": "icon/24x24.png",           
   		"38": "icon/48x48.png"            
 	  },
-    "default_title": "Open TeamCity Agent Monitor"
+    "default_title": "Open TeamCity Agent Monitor",
+    "default_popup": "html/popup.html"
   },
 
   "background": {
