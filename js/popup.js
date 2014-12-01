@@ -25,17 +25,15 @@ var showServerList = function() {
 var showAddServer = function() {
 	$("#noServers, #serverList").hide();
 	// Reset form
-	$("#url, #username, #password").val("");
-	$("#saveDiv").hide();
+	$("#url").val("http://");
+	hideSaveButtonAndTestStatus();
 	// Show form
 	$("#addServer").show();
 }
 
 var saveNewServer = function() {
 	var server = {
-		url:$("#url").val(),
-		username:$("#username").val(),
-		password:$("#password").val()
+		url:$("#url").val()
 	};
 	servers.push(server);
 
@@ -47,16 +45,48 @@ var saveNewServer = function() {
   showServerList();
 }
 
+var hideSaveButtonAndTestStatus = function() {
+	$("#saveDiv").hide();
+	updateStatus("");
+}
+
+var testCallback = function(a,b) {
+	if (b == "success") {
+		var teamCity = false;
+		try {
+			teamCity = ($(a.responseText)[1].text.search("TeamCity") > -1);
+		}	catch (err) {}
+
+		if (teamCity) {
+			updateStatus("TeamCity found");
+	    $("#saveDiv").show();
+	  } 
+		else {
+			updateStatus("Found something here but not TeamCity");
+		}
+	}
+	else {
+		updateStatus("Didn't find anything here. Probably an invalid or inactive url");
+	}	
+		
+	$("#test").attr("disabled", false);
+}
+
+var updateStatus = function(status) {
+	$("#testStatus").html(status);
+}
+
 var testConnection = function(event) { 
 	event.preventDefault();
-	$("#saveDiv").hide();
-	
-	//test
-	if (true) {
-		$("#saveDiv").show();
-	} else {
-		
-	}
+	hideSaveButtonAndTestStatus();
+	$("#test").attr("disabled", true);
+	updateStatus("Connecting...");
+
+	$.ajax({
+    url: $("#url").val(),
+    headers: { Accept:"application/json" },
+    complete: testCallback
+  });
 }
 
 var exit = function() {
@@ -64,7 +94,7 @@ var exit = function() {
 }
 
 var inputChanged = function() {
-	$("#saveDiv").hide();
+	hideSaveButtonAndTestStatus();
 }
 
 $("#addFirst").click(showAddServer);
@@ -74,6 +104,5 @@ $("#close").click(exit);
 $("#cancel").click(exit);
 $("#exit").click(exit);
 $("#addServer").submit(testConnection);
-
-$("#url, #username, #password").keydown(inputChanged);
-$("#url, #username, #password").focus(inputChanged);
+$("#url").keydown(inputChanged);
+$("#url").change(inputChanged);

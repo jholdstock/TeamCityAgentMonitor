@@ -28,7 +28,7 @@ var buildCallback = function(buildType) {
 var ajaxGet = function(url, callback) {
   $.ajax({
     url: tcUrl + url,
-    headers: { Accept:"application/json", Authorization: authString },
+    headers: { Accept:"application/json" },
     success: callback
   });
 }
@@ -69,10 +69,9 @@ body.empty();
 $("<div>").addClass("tsm_agent_wrapper").appendTo(body);
 $("<div>").addClass("tsm_build_wrapper").appendTo(body);
 
-var tcUrl, authString;
+var tcUrl;
 chrome.runtime.sendMessage({}, function(response) {
   tcUrl = response.tcUrl;
-  authString = "Basic " + btoa(response.username+":"+response.password);
   downloadAndDisplayAgents();
   downloadAndDisplayBuilds();
 });

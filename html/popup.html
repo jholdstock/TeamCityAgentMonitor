@@ -20,19 +20,13 @@
 			<h2>Add server</h2>
 			<label for="url">Server URL:</label>
 			&nbsp;
-			<input required type="text" id="url" />
+			<input required size="40" type="text" id="url" />
 			<br /><br />
-			<label for="username">Username:</label>
-			&nbsp;
-			<input required type="text" id="username" />
+			<input type="submit" id="test">&nbsp;&nbsp;<button id="cancel">Cancel</button>
 			<br /><br />
-			<label for="password">Password:</label>
-			&nbsp;
-			<input required type="password" id="password" />
-			<br /><br />
-			<input type="submit" id="test">&nbsp;&nbsp;<button id="cancel">Cancel</button>&nbsp;<label for"test" id="status"></label>
+			<div id="testStatus"></div>
 			<div id="saveDiv">
-				<br /><br />
+				<br />
 				<button id="save">Save</button>&nbsp;<label for"save" id="status"></label>
 			</div>
 		</form>
