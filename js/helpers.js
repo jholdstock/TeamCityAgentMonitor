@@ -38,3 +38,11 @@ var createOrUpdateElement = function(id, wrapper, topLeftText, topRightText, bot
 
   bgElement.removeClass().addClass(color);
 }
+
+var ajaxGet = function(url, callback) {
+  $.ajax({
+    url: tcUrl + url,
+    headers: { Accept:"application/json" },
+    success: callback
+  });
+}

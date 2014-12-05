@@ -14,20 +14,19 @@ body, .tsm_agent_wrapper, .tsm_build_wrapper {
 
 .tsm_agent_wrapper {
   display       : flex;
-  height        : 20%;
+  height        : 17%;
   flex-direction: row;  
 }
 
 .tsm_build_wrapper {
   display       : flex;
-  height        : 80%;
+  height        : 83%;
   flex-direction: column;  
 }
 /*
      Background divs
 */
-.tsm_green, .tsm_red, .tsm_orange, .tsm_gray {
-  flex         : 1;
+.tsm_green, .tsm_red, .tsm_orange, .tsm_gray, .tsm_black {
   box-sizing   : border-box;
   padding      : 10px;
   margin       : 12px 12px;
@@ -35,8 +34,13 @@ body, .tsm_agent_wrapper, .tsm_build_wrapper {
   position     : relative;
   border-radius: 10px;  
 }
-.tsm_box:first-of-type { margin-left: 16px; }
-.tsm_box:last-of-type  { margin-right: 16px; }
+.tsm_green, .tsm_red, .tsm_orange, .tsm_gray {
+  flex         : 1;
+}
+.tsm_black {
+  width: 15rem;
+  margin: 6px;
+}
 
 .tsm_green {
   background-color: #4cab4c;
@@ -57,6 +61,20 @@ body, .tsm_agent_wrapper, .tsm_build_wrapper {
 /*
      Text divs
 */
+.tsm_top {
+  font-size: 2.0rem;
+  opacity: 0.5;
+  width :100%;
+  text-align: center;
+}
+
+.tsm_centre {
+  font-size: 6.5rem;
+  opacity: 0.5;
+  width :100%;
+  text-align: center;
+  vertical-align: text-top;
+}
 
 .tsm_topRight, .tsm_topLeft, .tsm_bottomLeft, .tsm_bottomRight {
   margin     : 0.1rem;
