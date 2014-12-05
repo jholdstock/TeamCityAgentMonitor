@@ -1,13 +1,22 @@
 var agentCallback = function(agent) {
-  var color;
-  if (agent.connected) {
-    if (agent.enabled) color = "tsm_green";
-    else color = "tsm_red";
-  } else color = "tsm_gray";
+  var connected = agent.connected;
+  var enabled = agent.enabled;
+  var status = "";
+  var color = "tsm_green";
 
-  var connected = agent.connected? "Connected" : "Disconnected";
-  var enabled = agent.enabled? "Enabled" : "Disabled";
-  var status = connected + "<br>" + enabled;
+  if (enabled && !connected) {
+    color = "tsm_gray";
+    status = "Disconnected";
+  }
+  else if (!enabled && connected) {
+    color = "tsm_red";
+    status = "Disabled";
+  }
+  else if (!enabled && !connected) {
+    color = "tsm_orange";
+    status = "Disconnected<br>Disabled";
+  }
+ 
   drawAgent(agent.id, agent.name, status, color);
 };
 
