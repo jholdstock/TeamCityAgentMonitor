@@ -13,16 +13,15 @@
 
 		<div id="noServers">
 			<p>You currently have no configured TeamCity servers. Would you like to add one?</p>
-			<button id="addFirst">Yes</button>&nbsp;&nbsp;<button id="close">No</button>
+			<button class="add">Yes</button>&nbsp;&nbsp;<button class="exit">No</button>
 		</div>
 
 		<form id="addServer">
-			<h2>Add server</h2>
-			<label for="url">Server URL:</label>
+			<label for="url">TeamCity URL:</label>
 			&nbsp;
 			<input required size="40" type="text" id="url" />
 			<br /><br />
-			<input type="submit" id="test">&nbsp;&nbsp;<button id="cancel">Cancel</button>
+			<input type="submit" id="test">&nbsp;&nbsp;<button class="cancel">Cancel</button>
 			<br /><br />
 			<div id="testStatus"></div>
 			<div id="saveDiv">
@@ -34,7 +33,7 @@
 		<div id="serverList">
 			<div id="serverLinks"></div>
 			<br />
-			<button id="add">Add New</button>&nbsp;&nbsp;<button id="exit">Cancel</button>
+			<button class="add">Add New</button>&nbsp;&nbsp;<button class="exit">Close</button>
 		</div>
 
 		<script src="../vendor/jquery-1.11.1.min.js"></script>

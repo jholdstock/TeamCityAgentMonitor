@@ -94,7 +94,6 @@ var testCallback = function(a,b) {
 	else {
 		updateStatus("Didn't find anything here. Probably an invalid or inactive url");
 	}	
-		
 }
 
 var updateStatus = function(status) {
@@ -122,12 +121,11 @@ var inputChanged = function() {
 	hideSaveButtonAndTestStatus();
 }
 
-$("#addFirst").click(showAddServer);
-$("#add").click(showAddServer);
+$(".add").click(showAddServer);
+$(".exit").click(exit);
+
 $("#save").click(saveNewServer);
-$("#close").click(exit);
-$("#cancel").click(exit);
-$("#exit").click(exit);
+$("#cancel").click(showServerList);
 $("#addServer").submit(testConnection);
-$("#url").keydown(inputChanged);
-$("#url").change(inputChanged);
+
+$("#url").keydown(inputChanged).change(inputChanged);
