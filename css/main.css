@@ -14,13 +14,13 @@ body, .tsm_agent_wrapper, .tsm_build_wrapper {
 
 .tsm_agent_wrapper {
   display       : flex;
-  height        : 17%;
+  height        : 15%;
   flex-direction: row;  
 }
 
 .tsm_build_wrapper {
   display       : flex;
-  height        : 83%;
+  height        : 85%;
   flex-direction: column;  
 }
 /*

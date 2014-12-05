@@ -17,7 +17,7 @@ var agentCallback = function(agent) {
     status = "Disconnected<br>Disabled";
   }
  
-  drawAgent(agent.id, agent.name, status, color);
+  drawAgent("tsm_" + agent.id, agent.name, status, color);
 };
 
 var buildCallback = function(buildType) {
@@ -26,10 +26,10 @@ var buildCallback = function(buildType) {
       var name = buildType.projectName + " :: " + buildType.name;
       var date = parseDateString(build.finishDate);
       var status = build.status;
-      drawBuild(buildType.id, name, date, status, build.statusText);     
+      drawFailedBuild("tsm_" + buildType.id, name, date, status, build.statusText);
     }
     else {
-      removeElementIfExists(buildType.id);
+      $("#tsm_" + buildType.id).remove();
     }
   };
 }
@@ -40,44 +40,38 @@ var getBuildDetails = function(buildType) {
   }
 }
 
-var buildTypesCallback = function(response) {
-  var buildTypes = response.buildType;
-  for (var i = 0; i < buildTypes.length; i++) {
-    ajaxGet("/httpAuth/app/rest/builds/?locator=count:1,canceled:false,running:false,buildType:id:" + buildTypes[i].id,
-     getBuildDetails(buildTypes[i]));
-  }
-  setTimeout(downloadAndDisplayBuilds, 3000);
-}
-
-var agentIdsCallback = function(response) {
-  var agentIds = response.agent;
-  for (var i = 0; i < agentIds.length; i++) {
-    ajaxGet(agentIds[i].href, agentCallback)
-  }
-  setTimeout(downloadAndDisplayAgents, 3000);
-}
-
-var queueCallback = function(response) {
-  var queue = response.build;
-  var length = 0; 
-  if (queue !== undefined) {
-    length = queue.length;
-  }
-  
-  $(".tsm_centre").html(length);
-  setTimeout(downloadAndDisplayQueue, 1500);
-}
-
 var downloadAndDisplayBuilds = function() {
-  ajaxGet("/httpAuth/app/rest/buildTypes", buildTypesCallback);
+  ajaxGet("/httpAuth/app/rest/buildTypes", function(response) {
+    var buildTypes = response.buildType;
+    for (var i = 0; i < buildTypes.length; i++) {
+      ajaxGet("/httpAuth/app/rest/builds/?locator=count:1,canceled:false,running:false,buildType:id:" + buildTypes[i].id,
+       getBuildDetails(buildTypes[i]));
+    }
+    setTimeout(downloadAndDisplayBuilds, 3000);
+  });
 }
 
 var downloadAndDisplayAgents = function() {
-  ajaxGet("/httpAuth/app/rest/agents", agentIdsCallback);
+  ajaxGet("/httpAuth/app/rest/agents", function(response) {
+    var agentIds = response.agent;
+    for (var i = 0; i < agentIds.length; i++) {
+      ajaxGet(agentIds[i].href, agentCallback)
+    }
+    setTimeout(downloadAndDisplayAgents, 3000);
+  });
 }
 
 var downloadAndDisplayQueue = function() {
-  ajaxGet("/httpAuth/app/rest/buildQueue", queueCallback);
+  ajaxGet("/httpAuth/app/rest/buildQueue", function(response) {
+    var queue = response.build;
+    var length = 0; 
+    if (queue !== undefined) {
+      length = queue.length;
+    }
+    
+    $(".tsm_centre").html(length);
+    setTimeout(downloadAndDisplayQueue, 1500);
+  });
 }
 
 var body = $("body");
