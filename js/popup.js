@@ -15,12 +15,22 @@ var showServerList = function() {
 
 	$("#serverLinks").empty();
 	for(var i = 0; i < servers.length; i++) {
+		var container = $("<div>").attr("id", "btn_" + i + "_link");
+	
+		$("<label>")
+			.attr("for", "btn_" + i)
+			.text(servers[i].url)
+			.appendTo(container);
+
+		container.append("<br>");
+
 		$("<button>")
 			.attr("id", "btn_" + i)
-			.text(servers[i].url)
+			.text("View")
 			.click(serverButtonClick(servers[i].url))
-			.appendTo($("#serverLinks"));
-		$("#serverLinks").append("&nbsp;&nbsp;");
+			.appendTo(container);
+
+		container.appendTo($("#serverLinks"));
 	}
 
 	$("#serverList").show();
@@ -42,15 +52,19 @@ var showAddServer = function() {
 	$("#addServer").show();
 }
 
+var enteredUrl = function() {
+	var a = $('<a>', { href:$("#url").val() } )[0];
+  return a.origin;
+}
+
 var saveNewServer = function() {
 	var server = {
-		url:$("#url").val()
+		url:enteredUrl()
 	};
+
 	servers.push(server);
 
-	saveItems(servers, function() {
-		//callback
-	})
+	saveItems(servers, function() {});
 
 	$("#addServer").hide();
   showServerList();
@@ -62,6 +76,7 @@ var hideSaveButtonAndTestStatus = function() {
 }
 
 var testCallback = function(a,b) {
+	$("#test").attr("disabled", false);
 	if (b == "success") {
 		var teamCity = false;
 		try {
@@ -80,7 +95,6 @@ var testCallback = function(a,b) {
 		updateStatus("Didn't find anything here. Probably an invalid or inactive url");
 	}	
 		
-	$("#test").attr("disabled", false);
 }
 
 var updateStatus = function(status) {
@@ -94,7 +108,7 @@ var testConnection = function(event) {
 	updateStatus("Connecting...");
 
 	$.ajax({
-    url: $("#url").val(),
+    url: enteredUrl(),
     headers: { Accept:"application/json" },
     complete: testCallback
   });
