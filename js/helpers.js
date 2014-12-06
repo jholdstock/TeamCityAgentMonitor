@@ -16,7 +16,8 @@ var drawAgent = function(id, name, status, color) {
   existingElement.removeClass().addClass(color);
 }
 
-var drawFailedBuild = function(id, name, date, status, statusText) {
+var drawFailedBuild = function(build) {
+  var id = "tsm_" + build.buildType.id;
   var wrapper = $("div.tsm_build_wrapper");
   var existingElement = getElementIfExists(id, wrapper);
 
@@ -29,9 +30,9 @@ var drawFailedBuild = function(id, name, date, status, statusText) {
     wrapper.append(existingElement);
   }
 
-  $("div.tsm_topLeft", existingElement).html(name);
-  $("div.tsm_topRight", existingElement).html(date);
-  $("div.tsm_bottomLeft", existingElement).html(statusText);
+  $("div.tsm_topLeft", existingElement).html(build.buildType.projectName + " :: " + build.buildType.name);
+  $("div.tsm_topRight", existingElement).html(parseDateString(build.finishDate));
+  $("div.tsm_bottomLeft", existingElement).html(build.statusText);
   existingElement.removeClass().addClass("tsm_red");
 }
 
