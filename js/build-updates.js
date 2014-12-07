@@ -38,6 +38,26 @@ var buildCallback = function(buildType) {
   };
 };
 
+var drawBuildStatus = function(builds) {
+  removeBuildsWhichNoLongerExist(builds);
+
+  for (var i = 0; i < builds.length; i++) {
+    var build = builds[i];
+
+    if (build.neverRun === true) {
+      drawNeverRunBuild(build.buildType);
+    }
+    else if (build.status != "SUCCESS") {
+      drawFailedBuild(build);
+    }
+    else {
+      $("#tsm_b_" + build.buildType.id).remove();
+    }
+    
+    showSuccessIfAppropriate();
+  }
+};
+
 var removeBuildsWhichNoLongerExist = function(builds) {
   $.each($("div[id^=tsm_b_"), function(index, div) {
     div = $(div);
@@ -56,20 +76,23 @@ var removeBuildsWhichNoLongerExist = function(builds) {
   });
 }
 
-var drawBuildStatus = function(builds) {
-  removeBuildsWhichNoLongerExist(builds);
+var showSuccessIfAppropriate = function() {
+  if ($("div[id^=tsm_b_").length) {
+    $("div#tsm_success").remove();
+  }
+  else {
+    var id = "tsm_success";
+    var wrapper = $("div.tsm_build_wrapper");
+    var existingElement = getElementIfExists(id, wrapper);
 
-  for (var i = 0; i < builds.length; i++) {
-    var build = builds[i];
+    if (existingElement === undefined) {
+      existingElement = $("<div>").attr("id", id).addClass("tsm_green");
+      var centre = $("<div>").addClass("tsm_centre").addClass("tsm_border");
+      
+      existingElement.append(centre);
+      wrapper.append(existingElement);
+    }
 
-    if (build.neverRun === true) {
-      drawNeverRunBuild(build.buildType);
-    }
-    else if (build.status != "SUCCESS") {
-      drawFailedBuild(build);
-    }
-    else {
-      $("#tsm_b_" + build.buildType.id).remove();
-    }
-  }  
-};
+    $("div.tsm_centre", existingElement).html("All builds are passing");
+  }
+}
