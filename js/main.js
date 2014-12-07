@@ -37,5 +37,5 @@ var refreshQueue = true;
 prepareDOM();
 
 downloadAndDisplayQueue();
-setTimeout(downloadAndDisplayAgents, buildRefreshRate/2);
+downloadAndDisplayAgents();
 downloadAndDisplayBuilds();

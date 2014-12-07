@@ -38,7 +38,27 @@ var buildCallback = function(buildType) {
   };
 };
 
+var removeBuildsWhichNoLongerExist = function(builds) {
+  $.each($("div[id^=tsm_b_"), function(index, div) {
+    div = $(div);
+    
+    var stillExists = false;
+    var btId = div.attr("id").replace("tsm_b_", "");
+    for (var i = 0; i < builds.length; i++) {
+      if (builds[i].buildType.id == btId) {
+        stillExists = true;
+        break;
+      }
+    }
+    if (stillExists == false) { 
+      div.remove();
+    }
+  });
+}
+
 var drawBuildStatus = function(builds) {
+  removeBuildsWhichNoLongerExist(builds);
+
   for (var i = 0; i < builds.length; i++) {
     var build = builds[i];
 
