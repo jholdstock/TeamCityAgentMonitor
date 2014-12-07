@@ -16,7 +16,14 @@ var downloadAndDisplayBuilds = function() {
 
 var getBuildDetails = function(buildType) {
   return function(response) {
-    ajaxGet(response.build[0].href, buildCallback(buildType));
+    if (response.build && response.build[0]) {
+      ajaxGet(response.build[0].href, buildCallback(buildType));  
+    }
+    else {
+      // TODO: Build has never run
+      // For now just push a flag - need to replace with actual build obj
+      receivedBuilds.push(123);
+    }
   }
 };
 
@@ -26,15 +33,19 @@ var buildCallback = function(buildType) {
     receivedBuilds.push(build);
     
     if (receivedBuilds.length >= expectedBuilds) {
-      drawAllBuilds(receivedBuilds);
+      drawBuildStatus(receivedBuilds);
       if (refreshBuilds) setTimeout(downloadAndDisplayBuilds, buildRefreshRate);
     }
   };
 };
 
-var drawAllBuilds = function(builds) {
+var drawBuildStatus = function(builds) {
   for (var i = 0; i < builds.length; i++) {
     var build = builds[i];
+
+    // TODO: Handle build which never ran.
+    if (build == 123) continue;
+
     if (build.status != "SUCCESS") {
       drawFailedBuild(build);
     }

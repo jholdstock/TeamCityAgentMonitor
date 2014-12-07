@@ -6,7 +6,7 @@ var downloadAndDisplayQueue = function() {
       length = queue.length;
     }
     
-    $(".tsm_centre").html(length);
+    $("#tsm_queue .tsm_centre").html(length);
     if (refreshQueue) setTimeout(downloadAndDisplayQueue, queueRefreshRate);
   });
 }
