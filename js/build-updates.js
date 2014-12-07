@@ -49,7 +49,7 @@ var drawBuildStatus = function(builds) {
       drawFailedBuild(build);
     }
     else {
-      $("#tsm_" + build.buildType.id).remove();
+      $("#tsm_b_" + build.buildType.id).remove();
     }
   }  
 };

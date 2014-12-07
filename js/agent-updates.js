@@ -27,5 +27,5 @@ var agentCallback = function(agent) {
     status = "Disconnected<br>Disabled";
   }
  
-  drawAgent("tsm_" + agent.id, agent.name, status, color);
+  drawAgent("tsm_a_" + agent.id, agent.name, status, color);
 };

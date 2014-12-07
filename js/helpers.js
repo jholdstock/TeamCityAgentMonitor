@@ -28,7 +28,7 @@ var drawFailedBuild = function(build) {
 }
 
 var drawBuild = function(id, name, topRightText, bottomLeftText, color) {
-  var id = "tsm_" + id;
+  var id = "tsm_b_" + id;
   var wrapper = $("div.tsm_build_wrapper");
   var existingElement = getElementIfExists(id, wrapper);
 
