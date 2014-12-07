@@ -20,9 +20,8 @@ var getBuildDetails = function(buildType) {
       ajaxGet(response.build[0].href, buildCallback(buildType));  
     }
     else {
-      // TODO: Build has never run
-      // For now just push a flag - need to replace with actual build obj
-      receivedBuilds.push(123);
+      var neverRun = { neverRun: true, buildType: buildType };
+      receivedBuilds.push(neverRun);
     }
   }
 };
@@ -43,10 +42,10 @@ var drawBuildStatus = function(builds) {
   for (var i = 0; i < builds.length; i++) {
     var build = builds[i];
 
-    // TODO: Handle build which never ran.
-    if (build == 123) continue;
-
-    if (build.status != "SUCCESS") {
+    if (build.neverRun === true) {
+      drawNeverRunBuild(build.buildType);
+    }
+    else if (build.status != "SUCCESS") {
       drawFailedBuild(build);
     }
     else {

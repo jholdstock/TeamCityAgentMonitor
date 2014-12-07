@@ -16,8 +16,19 @@ var drawAgent = function(id, name, status, color) {
   existingElement.removeClass().addClass(color);
 }
 
+var drawNeverRunBuild = function(buildType) {
+  var name = buildType.projectName + " :: " + buildType.name;
+  drawBuild(buildType.id, name, "", "Build has never run", "tsm_orange")
+}
+
 var drawFailedBuild = function(build) {
-  var id = "tsm_" + build.buildType.id;
+  var buildType = build.buildType;
+  var name = buildType.projectName + " :: " + buildType.name;
+  drawBuild(buildType.id, name, parseDateString(build.finishDate), build.statusText, "tsm_red");
+}
+
+var drawBuild = function(id, name, topRightText, bottomLeftText, color) {
+  var id = "tsm_" + id;
   var wrapper = $("div.tsm_build_wrapper");
   var existingElement = getElementIfExists(id, wrapper);
 
@@ -30,10 +41,10 @@ var drawFailedBuild = function(build) {
     wrapper.append(existingElement);
   }
 
-  $("div.tsm_topLeft", existingElement).html(build.buildType.projectName + " :: " + build.buildType.name);
-  $("div.tsm_topRight", existingElement).html(parseDateString(build.finishDate));
-  $("div.tsm_bottomLeft", existingElement).html(build.statusText);
-  existingElement.removeClass().addClass("tsm_red");
+  $("div.tsm_topLeft", existingElement).html(name);
+  $("div.tsm_topRight", existingElement).html(topRightText);
+  $("div.tsm_bottomLeft", existingElement).html(bottomLeftText);
+  existingElement.removeClass().addClass(color);
 }
 
 var getElementIfExists = function(selector, wrapper) {

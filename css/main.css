@@ -97,11 +97,11 @@ body, .tsm_agent_wrapper, .tsm_build_wrapper {
 }
 
 .tsm_translucent {
-  opacity  : 0.3;
+  opacity  : 0.4;
 }
 
 .tsm_bottomLeft {
-  font-size: 3.0rem;
+  font-size: 3.5rem;
   float    : left;
   position : absolute;
   bottom   : 0;
