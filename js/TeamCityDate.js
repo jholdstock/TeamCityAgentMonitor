@@ -1,5 +1,5 @@
 function TeamCityDate(dateString) {
-  this.date;
+  this.date = null;
 
   this.construct = function(dateString) {
     var year = dateString.substring(0,4);
@@ -9,11 +9,11 @@ function TeamCityDate(dateString) {
     var minutes = dateString.substring(11,13);
     var seconds = dateString.substring(13,15);
     this.date = new Date(year, month-1, day, hours, minutes, seconds, 0);  
-  }
+  };
 
   this.getDate = function() {
     return this.date;
-  }
+  };
 
   this.construct(dateString);
 };
