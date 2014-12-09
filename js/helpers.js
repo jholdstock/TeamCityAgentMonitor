@@ -44,7 +44,7 @@ var drawBuild = function(id, name, topRightText, bottomLeftText, color) {
     existingElement = $("<div>").attr("id", id);
     var topLeft = $("<div>").addClass("tsm_topLeft").addClass("tsm_border");
     var topRight = $("<div>").addClass("tsm_topRight").addClass("tsm_border");
-    var bottomLeft = $("<div>").addClass("tsm_bottomLeft").addClass("tsm_translucent");
+    var bottomLeft = $("<div>").addClass("tsm_bottomLeft").addClass("tsm_translucent").addClass("tsm_border");
     existingElement.append(topLeft).append(topRight).append(bottomLeft);
     wrapper.append(existingElement);
   }

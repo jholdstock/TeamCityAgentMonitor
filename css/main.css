@@ -1,10 +1,10 @@
 body {
-  font-family: sans-serif;
   font-size  : 10px;
   cursor     : default;
 }
 
 body, .tsm_agent_wrapper, .tsm_build_wrapper {
+  font-family: sans-serif;
   color           : white;
   width           : 100%;
   background-color: black;
@@ -67,7 +67,7 @@ body, .tsm_agent_wrapper, .tsm_build_wrapper {
 }
 
 .tsm_success_msg {
-  font-size: 4.0rem;
+  font-size: 4.5rem;
 }
 
 .tsm_success_time {

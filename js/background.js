@@ -1,6 +1,6 @@
 var openTab = function(url) {
 		chrome.tabs.create({
-      url: url + "/externalStatus.html"
+      url: url + "/1"
     });
     chrome.tabs.insertCSS(null, {file: "css/main.css"});
     chrome.tabs.executeScript(null, {file: "vendor/jquery-1.11.1.min.js"});
