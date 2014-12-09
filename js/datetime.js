@@ -1,26 +1,14 @@
 var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-var getFailureDateTime = function(now, dateString) {
-  console.log(dateString);
-  var date = dateString.substring(0,8);
-  var year = date.substring(0,4);
-  var month = date.substring(4,6);
-  var sMonth = monthNames[month-1];
+var getFailureDateTime = function(now, then) {
+  var sMonth = monthNames[then.getMonth()];
+  var finishDate = then.getDate() + " " + sMonth + " " + then.getFullYear();
 
-  var day = date.substring(6,8);
-  var finishDate = day + " " + sMonth + " " + year;
+  var hours = ("0" + then.getHours()).slice(-2);
+  var minutes = ("0" + then.getMinutes()).slice(-2);
+  var finishTime = hours + ":" + minutes;
   
-  var time = dateString.substring(9,14);
-  var hours = time.substring(0,2);
-  var minutes = time.substring(2,4);
-  var finishTime = hours + ":" +  minutes;
-
-  var msg1 = "Failed on " + finishDate + " at " + finishTime;
-
-  var then = new Date(year, month-1, day, hours, minutes, 0, 0);
-  var msg2 = getElapsedTime(now, then);
-  
-  return msg1 + "<br>" + msg2;
+  return "Failed on " + finishDate + " at " + finishTime;
 }
 
 var getElapsedTime = function(now, then) {

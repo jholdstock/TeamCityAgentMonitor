@@ -24,8 +24,14 @@ var drawNeverRunBuild = function(buildType) {
 var drawFailedBuild = function(build) {
   var buildType = build.buildType;
   var name = buildType.projectName + " :: " + buildType.name;
+  
   var now = new Date();
-  drawBuild(buildType.id, name, getFailureDateTime(now, build.finishDate), build.statusText, "tsm_red");
+  var then = new TeamCityDate(build.finishDate).getDate();
+  var msg1 = getFailureDateTime(now, then);
+  var msg2 = getElapsedTime(now, then);
+  var dateString = msg1 + "<br>" + msg2;
+
+  drawBuild(buildType.id, name, dateString, build.statusText, "tsm_red");
 }
 
 var drawBuild = function(id, name, topRightText, bottomLeftText, color) {
