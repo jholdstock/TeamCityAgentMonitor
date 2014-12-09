@@ -24,7 +24,8 @@ var drawNeverRunBuild = function(buildType) {
 var drawFailedBuild = function(build) {
   var buildType = build.buildType;
   var name = buildType.projectName + " :: " + buildType.name;
-  drawBuild(buildType.id, name, parseDateString(build.finishDate), build.statusText, "tsm_red");
+  var now = new Date();
+  drawBuild(buildType.id, name, getFailureDateTime(now, build.finishDate), build.statusText, "tsm_red");
 }
 
 var drawBuild = function(id, name, topRightText, bottomLeftText, color) {

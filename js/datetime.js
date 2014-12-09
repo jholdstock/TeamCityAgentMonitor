@@ -1,8 +1,11 @@
-var parseDateString = function (dateString) {
+var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+var getFailureDateTime = function(now, dateString) {
+  console.log(dateString);
   var date = dateString.substring(0,8);
   var year = date.substring(0,4);
   var month = date.substring(4,6);
-  var sMonth = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][month-1];
+  var sMonth = monthNames[month-1];
 
   var day = date.substring(6,8);
   var finishDate = day + " " + sMonth + " " + year;
@@ -12,14 +15,15 @@ var parseDateString = function (dateString) {
   var minutes = time.substring(2,4);
   var finishTime = hours + ":" +  minutes;
 
+  var msg1 = "Failed on " + finishDate + " at " + finishTime;
+
   var then = new Date(year, month-1, day, hours, minutes, 0, 0);
+  var msg2 = getElapsedTime(now, then);
   
-  return "Failed on " + finishDate + " at " + finishTime + "<br>" + getElapsedTime(then);
+  return msg1 + "<br>" + msg2;
 }
 
-var getElapsedTime = function(then) {
-  var now = new Date();
-
+var getElapsedTime = function(now, then) {
   var minutes = Math.floor((now - then)/1000/60);
 
   if (minutes == 0) {
