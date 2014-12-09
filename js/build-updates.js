@@ -87,12 +87,22 @@ var showSuccessIfAppropriate = function() {
 
     if (existingElement === undefined) {
       existingElement = $("<div>").attr("id", id).addClass("tsm_green");
-      var centre = $("<div>").addClass("tsm_centre").addClass("tsm_border");
+      var centre = $("<div>").addClass("tsm_success_msg").addClass("tsm_border");
+      var centre2 = $("<div>").addClass("tsm_success_time").addClass("tsm_border");
       
-      existingElement.append(centre);
+      existingElement.append(centre).append(centre2);
       wrapper.append(existingElement);
     }
 
-    $("div.tsm_centre", existingElement).html("All builds are passing");
+    $("div.tsm_success_msg", existingElement).html("All builds are passing");
+    ajaxGet("/httpAuth/app/rest/builds/?locator=count:1,canceled:false,running:false,status:failure", failedBuildCallback);
   }
+}
+
+var failedBuildCallback = function(response) {
+  ajaxGet(response.build[0].href, function(response) {
+    var then = new TeamCityDate(response.finishDate).getDate();
+    var interval = new TimeInterval(new Date(), then);
+  $("div.tsm_success_time").html("Last failure was " + interval.getElapsedTime().toLowerCase() + " ago");
+  });
 }

@@ -6,7 +6,7 @@ var downloadAndDisplayQueue = function() {
       length = queue.length;
     }
     
-    $("#tsm_queue .tsm_centre").html(length);
+    $(".tsm_queue_count").html(length);
     if (refreshQueue) setTimeout(downloadAndDisplayQueue, queueRefreshRate);
   });
 }
@@ -16,9 +16,9 @@ var prepareDOM = function() {
   body.empty();
   $("<div>").addClass("tsm_agent_wrapper").appendTo(body);
   $("<div>").addClass("tsm_build_wrapper").appendTo(body);
-  var queueElement = $("<div>").attr("id", "tsm_queue").addClass("tsm_black");
-  var label = $("<div>").addClass("tsm_top").html("Queue Length");
-  var centre = $("<div>").addClass("tsm_centre").html("0");
+  var queueElement = $("<div>").addClass("tsm_black");
+  var label = $("<div>").addClass("tsm_queue_label").html("Queue Length");
+  var centre = $("<div>").addClass("tsm_queue_count").html("0");
   queueElement.append(label).append(centre);
   $("div.tsm_agent_wrapper").append(queueElement);
 }

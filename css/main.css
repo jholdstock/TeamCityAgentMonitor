@@ -61,18 +61,32 @@ body, .tsm_agent_wrapper, .tsm_build_wrapper {
 /*
      Text divs
 */
-.tsm_top {
-  font-size: 2.0rem;
+
+.tsm_success_msg, .tsm_success_time {
+  text-align: center;
+}
+
+.tsm_success_msg {
+  font-size: 4.0rem;
+}
+
+.tsm_success_time {
+  font-size: 3.0rem;
+  opacity: 0.5;
+}
+
+.tsm_queue_label, .tsm_queue_count {
   opacity: 0.5;
   width :100%;
   text-align: center;
 }
 
-.tsm_centre {
+.tsm_queue_label {
+  font-size: 2.0rem;
+}
+
+.tsm_queue_count {
   font-size: 6.5rem;
-  opacity: 0.5;
-  width :100%;
-  text-align: center;
   vertical-align: text-top;
 }
 
