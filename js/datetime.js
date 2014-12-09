@@ -7,7 +7,7 @@ var getFailureDateTime = function(now, then) {
   var hours = ("0" + then.getHours()).slice(-2);
   var minutes = ("0" + then.getMinutes()).slice(-2);
   var finishTime = hours + ":" + minutes;
-  
+
   return "Failed on " + finishDate + " at " + finishTime;
 }
 
@@ -15,11 +15,11 @@ var getElapsedTime = function(now, then) {
   var minutes = Math.floor((now - then)/1000/60);
 
   if (minutes == 0) {
-    return "Less than a minute ago";
+    return "Less than a minute";
   } 
 
   if (minutes < 60) {
-    return constructSubString(minutes, "minute") + " ago";
+    return constructSubString(minutes, "minute");
   } 
 
   var hours = Math.floor(minutes / 60);
@@ -36,10 +36,18 @@ var getElapsedTime = function(now, then) {
 };
 
 var constructString = function(val1, unit1, val2, unit2) {
-  return constructSubString(val1, unit1) + " " + constructSubString(val2, unit2) + " ago";
+  var s1 = constructSubString(val1, unit1);
+  var s2 = constructSubString(val2, unit2);
+  if (s2 == "") {
+    return s1;
+  }
+  else {
+    return s1 + " " + s2;
+  }
 };
 
 var constructSubString = function(val, unit) {
+  if (val == 0) return "";
   if (val > 1) { unit += "s" };
   return val + " " + unit;
 }
