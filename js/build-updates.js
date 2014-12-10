@@ -87,10 +87,12 @@ var showSuccessIfAppropriate = function() {
 
     if (existingElement === undefined) {
       existingElement = $("<div>").attr("id", id).addClass("tsm_green");
-      var centre = $("<div>").addClass("tsm_success_msg").addClass("tsm_border");
-      var centre2 = $("<div>").addClass("tsm_success_time").addClass("tsm_border");
       
-      existingElement.append(centre).append(centre2);
+      existingElement.append([
+        $("<div>").addClass("tsm_success_msg tsm_border"),
+        $("<div>").addClass("tsm_success_time tsm_border")
+      ]);
+      
       wrapper.append(existingElement);
     }
 
@@ -103,6 +105,6 @@ var failedBuildCallback = function(response) {
   ajaxGet(response.build[0].href, function(response) {
     var then = new TeamCityDate(response.finishDate).getDate();
     var interval = new TimeInterval(new Date(), then);
-  $("div.tsm_success_time").html("Last failure was " + interval.getElapsedTime().toLowerCase() + " ago");
+    $("div.tsm_success_time").html("Last failure was " + interval.getElapsedTime().toLowerCase() + " ago");
   });
 }

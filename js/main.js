@@ -12,14 +12,15 @@ var downloadAndDisplayQueue = function() {
 }
 
 var prepareDOM = function() {
-  var body = $("body");
-  body.empty();
-  $("<div>").addClass("tsm_agent_wrapper").appendTo(body);
-  $("<div>").addClass("tsm_build_wrapper").appendTo(body);
+  $("body").empty().append([
+    $("<div>").addClass("tsm_agent_wrapper"),
+    $("<div>").addClass("tsm_build_wrapper")
+  ]);
   var queueElement = $("<div>").addClass("tsm_black");
-  var label = $("<div>").addClass("tsm_queue_label").html("Queue Length");
-  var centre = $("<div>").addClass("tsm_queue_count").html("0");
-  queueElement.append(label).append(centre);
+  queueElement.append([
+    $("<div>").addClass("tsm_queue_label").html("Queue Length"),
+    $("<div>").addClass("tsm_queue_count").html("0")
+  ]);
   $("div.tsm_agent_wrapper").append(queueElement);
 }
 

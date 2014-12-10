@@ -4,10 +4,13 @@ var drawAgent = function(id, name, status, color) {
 
   if (existingElement === undefined) {
     existingElement = $("<div>").attr("id", id);
-    var topLeft = $("<div>").addClass("tsm_topLeft").addClass("tsm_border");
-    var topRight = $("<div>").addClass("tsm_topRight").addClass("tsm_border");
-    var bottomLeft = $("<div>").addClass("tsm_bottomLeft").addClass("tsm_translucent").html("AGENT");
-    existingElement.append(topLeft).append(topRight).append(bottomLeft);
+    
+    existingElement.append([
+      $("<div>").addClass("tsm_topLeft tsm_border"),
+      $("<div>").addClass("tsm_topRight tsm_border"),
+      $("<div>").addClass("tsm_bottomLeft tsm_translucent").html("AGENT")
+    ]);
+
     wrapper.append(existingElement);
   }
 
@@ -25,9 +28,8 @@ var drawFailedBuild = function(build) {
   var buildType = build.buildType;
   var name = buildType.projectName + " :: " + buildType.name;
   
-  var now = new Date();
-  var then = new TeamCityDate(build.finishDate).getDate();
-  var interval = new TimeInterval(now, then);
+  var failureTime = new TeamCityDate(build.finishDate).getDate();
+  var interval = new TimeInterval(new Date(), failureTime);
   var msg1 = interval.getFailureDateTime();
   var msg2 = interval.getElapsedTime() + " ago";
   var dateString = msg1 + "<br>" + msg2;
@@ -42,10 +44,11 @@ var drawBuild = function(id, name, topRightText, bottomLeftText, color) {
 
   if (existingElement === undefined) {
     existingElement = $("<div>").attr("id", id);
-    var topLeft = $("<div>").addClass("tsm_topLeft").addClass("tsm_border");
-    var topRight = $("<div>").addClass("tsm_topRight").addClass("tsm_border");
-    var bottomLeft = $("<div>").addClass("tsm_bottomLeft").addClass("tsm_translucent").addClass("tsm_border");
-    existingElement.append(topLeft).append(topRight).append(bottomLeft);
+    existingElement.append([
+      $("<div>").addClass("tsm_topLeft tsm_border"),
+      $("<div>").addClass("tsm_topRight tsm_border"),
+      $("<div>").addClass("tsm_bottomLeft tsm_border tsm_translucent")
+    ]);
     wrapper.append(existingElement);
   }
 
@@ -64,10 +67,16 @@ var getElementIfExists = function(selector, wrapper) {
   }
 }
 
+var ajaxError = function() {
+  alert("An error occurred contacting TeamCity.");
+  location.reload();
+}
+
 var ajaxGet = function(url, callback) {
   $.ajax({
     url: tcUrl + url,
     headers: { Accept:"application/json" },
-    success: callback
+    success: callback,
+    error: ajaxError
   });
 }
