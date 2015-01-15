@@ -33,7 +33,7 @@ var buildCallback = function(buildType) {
     
     if (receivedBuilds.length >= expectedBuilds) {
       drawBuildStatus(receivedBuilds);
-      if (refreshBuilds) setTimeout(downloadAndDisplayBuilds, buildRefreshRate);
+      if (refreshBuilds & !handlingError) setTimeout(downloadAndDisplayBuilds, buildRefreshRate);
     }
   };
 };

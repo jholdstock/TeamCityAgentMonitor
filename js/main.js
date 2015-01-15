@@ -7,7 +7,7 @@ var downloadAndDisplayQueue = function() {
     }
     
     $(".tsm_queue_count").html(length);
-    if (refreshQueue) setTimeout(downloadAndDisplayQueue, queueRefreshRate);
+    if (refreshQueue & !handlingError) setTimeout(downloadAndDisplayQueue, queueRefreshRate);
   });
 }
 

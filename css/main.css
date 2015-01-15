@@ -12,6 +12,31 @@ body, .tsm_agent_wrapper, .tsm_build_wrapper {
   padding         : 0;
 }
 
+.tsm_whiteout {
+  z-index: 999;
+  background-color: rgba(255,255,255,.5);
+  position:absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.tsm_bigAlert {
+  text-align: center;
+  color: white;
+  z-index: 9999;
+  font-size: 3rem;
+  padding: 1.2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  background-color: #c0392b;
+  border: 6px solid red;
+  border-radius: 3rem;
+}
+
 .tsm_agent_wrapper {
   display       : flex;
   height        : 15%;

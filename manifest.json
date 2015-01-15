@@ -37,5 +37,7 @@
 
   "background": {
     "scripts": ["js/background.js"]
-  }
+  },
+
+  "web_accessible_resources": ["img/spinner.gif"]
 }
