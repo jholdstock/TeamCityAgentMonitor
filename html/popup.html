@@ -1,38 +1,50 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<style>
-    	body   { min-width: 18rem; }
-    	h2     { font-size: 14px; }
-    	label  { font-size: 12px; }
+			html {
+				font-size : 62.5%; 
+			} 
+    	body   { 
+				margin    : 1rem 2rem;
+				font-size : 1.4rem;
+    	}
+    	h3 {
+    		margin: 0;
+    		font-weight: 600;
+    	}
+    	p {
+    		min-width: 25rem;
+    	}
+    	#testStatus {
+				margin: 1.0rem 0;
+    	}
+    	#url {
+    		margin: 0.8rem 0 0;
+    	}
   	</style>
 	</head>
-
 	<body>
 
 		<div id="noServers">
-			<p>You currently have no configured TeamCity servers. Would you like to add one?</p>
+			<p>You currently have no saved TeamCity servers. Would you like to add one?</p>
 			<button class="add">Yes</button>&nbsp;&nbsp;<button class="exit">No</button>
 		</div>
 
 		<form id="addServer">
-			<label for="url">TeamCity URL:</label>
-			&nbsp;
-			<input required size="40" type="text" id="url" />
+			<h3>TeamCity URL:</h3>
+			<input required size="30" type="text" id="url" />
 			<br /><br />
-			<input type="submit" id="test">&nbsp;&nbsp;<button class="cancel">Cancel</button>
-			<br /><br />
+			<input type="submit" id="test" />&nbsp;&nbsp;<button id="cancel">Cancel</button>
 			<div id="testStatus"></div>
 			<div id="saveDiv">
-				<br />
 				<button id="save">Save</button>&nbsp;<label for"save" id="status"></label>
 			</div>
 		</form>
 
 		<div id="serverList">
+		<h3>Choose a server</h3>
 			<div id="serverLinks"></div>
-			<br />
 			<button class="add">Add New</button>&nbsp;&nbsp;<button class="exit">Close</button>
 		</div>
 

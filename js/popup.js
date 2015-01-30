@@ -14,23 +14,25 @@ var showServerList = function() {
 	} 
 
 	$("#serverLinks").empty();
+	$("#serverLinks").append($("<table>").attr("id", "serverTable").css("padding", "0.5rem 0 1rem"));
 	for(var i = 0; i < servers.length; i++) {
-		var container = $("<div>").attr("id", "btn_" + i + "_link");
+		var container = $("<tr>").attr("id", "btn_" + i + "_link");
 	
-		$("<label>")
-			.attr("for", "btn_" + i)
+		$("<td>")
 			.text(servers[i].url)
-			.appendTo(container);
+			.appendTo(container).append("&nbsp;&nbsp;&nbsp;")
+			.css("padding", "1rem 0");
+				
 
-		container.append("<br>");
-
-		$("<button>")
+		var button = $("<button>")
 			.attr("id", "btn_" + i)
 			.text("View")
-			.click(serverButtonClick(servers[i].url))
-			.appendTo(container);
+			.click(serverButtonClick(servers[i].url));
 
-		container.appendTo($("#serverLinks"));
+		var buttonTd = $("<td>").append(button);
+
+		buttonTd.appendTo(container);
+		container.appendTo($("#serverTable"));
 	}
 
 	$("#serverList").show();
