@@ -24,9 +24,9 @@ var prepareDOM = function() {
   $("div.tsm_agent_wrapper").append(queueElement);
 }
 
-var agentRefreshRate = 3000;
-var buildRefreshRate = 3000;
-var queueRefreshRate = 1500;
+var agentRefreshRate = 30000;
+var buildRefreshRate = 30000;
+var queueRefreshRate = 15000;
 
 var refreshAgents = true;
 var refreshBuilds = true;

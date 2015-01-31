@@ -4,13 +4,10 @@ var hideAll = function() {
 hideAll();
 
 loadConfig(function(items) {
+	servers = items.servers;
   $('#refreshRate').val(items.refreshRate);
   $('#successMessage').val(items.successMessage);
   $('#hideCursor').prop("checked", items.hideCursor);
-});
-
-loadFromStorage(function(items) {
-	servers = items.servers;
 	showServerList();
 });
 
@@ -21,7 +18,7 @@ $('#saveSettingsBtn').on('click', function() {
     hideCursor    : $('#hideCursor').prop("checked"),
   }, function() {
     var status = $('#saveSettingsStatus');
-    status.text("  Settings saved.");
+    status.text("    Saved.");
     var button = $("#saveSettingsBtn");
     button.prop("disabled", true);
     setTimeout(function() {
@@ -44,7 +41,6 @@ var showSettings = function() {
 	hideAll();
 	$("#settings").show();
 }	
-
 
 var showServerList = function() {
 	hideAll();
@@ -103,7 +99,7 @@ var saveNewServer = function() {
 
 	servers.push(server);
 
-	saveInStorage(servers, function() {});
+	saveConfig({servers:servers}, function() {});
 
 	$("#addServer").hide();
   showServerList();
