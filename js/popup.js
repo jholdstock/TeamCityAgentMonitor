@@ -3,9 +3,41 @@ var hideAll = function() {
 }
 hideAll();
 
+loadConfig(function(items) {
+  $('#refreshRate').val(items.refreshRate);
+  $('#successMessage').val(items.successMessage);
+  $('#hideCursor').prop("checked", items.hideCursor);
+});
+
 loadFromStorage(function(items) {
 	servers = items.servers;
 	showServerList();
+});
+
+$('#saveSettingsBtn').on('click', function() {
+  saveConfig({
+    refreshRate   : $('#refreshRate').val(),
+    successMessage: $('#successMessage').val(),
+    hideCursor    : $('#hideCursor').prop("checked"),
+  }, function() {
+    var status = $('#saveSettingsStatus');
+    status.text("  Settings saved.");
+    var button = $("#saveSettingsBtn");
+    button.prop("disabled", true);
+    setTimeout(function() {
+      status.text('');
+      button.prop("disabled", false);
+    }, 1000);
+  });
+});
+
+$('#refreshRate').on("keydown", function() {
+  return ( event.ctrlKey || event.altKey 
+                    || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) 
+                    || (95<event.keyCode && event.keyCode<106)
+                    || (event.keyCode==8) || (event.keyCode==9) 
+                    || (event.keyCode>34 && event.keyCode<40) 
+                    || (event.keyCode==46) )
 });
 
 var showSettings = function() {
@@ -130,7 +162,7 @@ var inputChanged = function() {
 
 $(".addServerBtn").click(showAddServer);
 $(".exit").click(exit);
-$("#saveServer").click(saveNewServer);
+$("#saveServerBtn").click(saveNewServer);
 $(".showServersBtn").click(showServerList);
 $(".settingsBtn").click(showSettings);
 $("#addServer").submit(testConnection);
