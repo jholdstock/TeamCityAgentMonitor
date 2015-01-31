@@ -5,6 +5,7 @@ hideAll();
 
 loadConfig(function(items) {
 	servers = items.servers;
+	config = items;
   $('#refreshRate').val(items.refreshRate);
   $('#successMessage').val(items.successMessage);
   $('#hideCursor').prop("checked", items.hideCursor);
@@ -73,7 +74,7 @@ var showServerList = function() {
 
 var serverButtonClick = function(url) {
 	return function() {
-		chrome.extension.getBackgroundPage().openTab(url);
+		chrome.extension.getBackgroundPage().openTab(url, config);
     exit();
 	};
 }

@@ -24,9 +24,9 @@ var prepareDOM = function() {
   $("div.tsm_agent_wrapper").append(queueElement);
 }
 
-var agentRefreshRate = 30000;
+var agentRefreshRate = 5000;
 var buildRefreshRate = 30000;
-var queueRefreshRate = 15000;
+var queueRefreshRate = 1500;
 
 var refreshAgents = true;
 var refreshBuilds = true;
@@ -40,3 +40,9 @@ prepareDOM();
 downloadAndDisplayQueue();
 downloadAndDisplayAgents();
 downloadAndDisplayBuilds();
+
+
+// These are the config options ready to use 
+// alert(refreshRate);
+// alert(successMessage);
+// alert(hideCursor);
