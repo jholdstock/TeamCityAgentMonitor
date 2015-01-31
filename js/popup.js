@@ -1,13 +1,21 @@
-$("#noServers, #serverList, #addServer").hide();
-$("#test").val("Test connection");
+var hideAll = function() {
+	$("#noServers, #serverList, #addServer, #settings").hide();	
+}
+hideAll();
 
-loadItems(function(items) {
+loadFromStorage(function(items) {
 	servers = items.servers;
 	showServerList();
 });
 
+var showSettings = function() {
+	hideAll();
+	$("#settings").show();
+}	
+
+
 var showServerList = function() {
-	$("#noServers, #serverList, #addServer").hide();
+	hideAll();
 	if (servers.length == 0) {
 		$("#noServers").show();
 		return;
@@ -15,26 +23,23 @@ var showServerList = function() {
 
 	$("#serverLinks").empty();
 	$("#serverLinks").append($("<table>").attr("id", "serverTable").css("padding", "0.5rem 0 1rem"));
-	for(var i = 0; i < servers.length; i++) {
-		var container = $("<tr>").attr("id", "btn_" + i + "_link");
+	$.each(servers, function(index, server){
+		var container = $("<tr>");
 	
-		$("<td>")
-			.text(servers[i].url)
-			.appendTo(container).append("&nbsp;&nbsp;&nbsp;")
+		var name = $("<td>")
+			.text(server.url)
+			.append("&nbsp;&nbsp;&nbsp;")
 			.css("padding", "1rem 0");
-				
 
-		var button = $("<button>")
-			.attr("id", "btn_" + i)
-			.text("View")
-			.click(serverButtonClick(servers[i].url));
+		var button = $("<td>").append(
+			$("<button>")
+				.text("View")
+				.click(serverButtonClick(server.url))
+			);
 
-		var buttonTd = $("<td>").append(button);
-
-		buttonTd.appendTo(container);
-		container.appendTo($("#serverTable"));
-	}
-
+		container.append(name).append(button).appendTo($("#serverTable"));
+	});
+	
 	$("#serverList").show();
 }
 
@@ -46,11 +51,11 @@ var serverButtonClick = function(url) {
 }
 
 var showAddServer = function() {
-	$("#noServers, #serverList").hide();
-	// Reset form
+	hideAll();
+
 	$("#url").val("http://");
 	hideSaveButtonAndTestStatus();
-	// Show form
+
 	$("#addServer").show();
 }
 
@@ -66,7 +71,7 @@ var saveNewServer = function() {
 
 	servers.push(server);
 
-	saveItems(servers, function() {});
+	saveInStorage(servers, function() {});
 
 	$("#addServer").hide();
   showServerList();
@@ -123,11 +128,10 @@ var inputChanged = function() {
 	hideSaveButtonAndTestStatus();
 }
 
-$(".add").click(showAddServer);
+$(".addServerBtn").click(showAddServer);
 $(".exit").click(exit);
-
-$("#save").click(saveNewServer);
-$("#cancel").click(showServerList);
+$("#saveServer").click(saveNewServer);
+$(".showServersBtn").click(showServerList);
+$(".settingsBtn").click(showSettings);
 $("#addServer").submit(testConnection);
-
 $("#url").keydown(inputChanged).change(inputChanged);
