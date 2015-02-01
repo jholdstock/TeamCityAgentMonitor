@@ -50,10 +50,8 @@ var showServerList = function() {
 	} 
 
 	$("#serverLinks").empty();
-	$("#serverLinks").append($("<table>").attr("id", "serverTable").css("padding", "0.5rem 0 1rem"));
+	$("<table>").attr("id", "serverTable").css("padding", "0.5rem 0 1rem").appendTo($("#serverLinks"));
 	$.each(servers, function(index, server){
-		var container = $("<tr>");
-	
 		var name = $("<td>")
 			.text(server.url)
 			.append("&nbsp;&nbsp;&nbsp;")
@@ -65,7 +63,7 @@ var showServerList = function() {
 				.click(serverButtonClick(server.url))
 			);
 
-		container.append(name).append(button).appendTo($("#serverTable"));
+		$("<tr>").append([name, button]).appendTo($("#serverTable"));
 	});
 	
 	$("#serverList").show();

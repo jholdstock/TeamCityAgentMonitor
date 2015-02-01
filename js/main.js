@@ -2,8 +2,6 @@ var buildRefreshRate = 10000;
 var agentRefreshRate = 10000;
 var queueRefreshRate = 2000;
 
-var hideCursor = true;
-
 var refreshAgents = true;
 var refreshBuilds = true;
 var refreshQueue = true;
@@ -22,9 +20,7 @@ var prepareDOM = function() {
     $("<div>").addClass("tsm_queue_count").html("0")
   ]);
   $("div.tsm_agent_wrapper").append(queueElement);
-}
-
-prepareDOM();
+}();
 
 var applyHideCursor = function(hideCursor) {
   console.log(hideCursor);
