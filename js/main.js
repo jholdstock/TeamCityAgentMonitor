@@ -2,6 +2,8 @@ var buildRefreshRate = 10000;
 var agentRefreshRate = 10000;
 var queueRefreshRate = 2000;
 
+var hideCursor = true;
+
 var refreshAgents = true;
 var refreshBuilds = true;
 var refreshQueue = true;
@@ -21,12 +23,23 @@ var prepareDOM = function() {
   ]);
   $("div.tsm_agent_wrapper").append(queueElement);
 }
+
 prepareDOM();
+
+var applyHideCursor = function(hideCursor) {
+  console.log(hideCursor);
+  if (hideCursor) {
+    $("body").css("cursor", "none");
+  }
+  else {
+   $("body").css("cursor", "default"); 
+  }
+}
 
 loadConfig(function(items) {
   buildRefreshRate = items.refreshRate * 1000;
   successMessage = items.successMessage;
-  hideCursor = items.hideCursor;
+  applyHideCursor(items.hideCursor);
 });
 
 chrome.storage.onChanged.addListener(function(changes, namespace) {
@@ -40,7 +53,7 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
         successMessage = storageChange.newValue;
         break;
       case "hideCursor":
-        hideCursor = storageChange.newValue;
+        applyHideCursor(storageChange.newValue);
         break;
     }
   }
