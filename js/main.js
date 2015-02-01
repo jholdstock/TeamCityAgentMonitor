@@ -1,3 +1,14 @@
+var buildRefreshRate = 10000;
+var agentRefreshRate = 10000;
+var queueRefreshRate = 2000;
+
+var refreshAgents = true;
+var refreshBuilds = true;
+var refreshQueue = true;
+//refreshAgents = false;
+//refreshBuilds = false;
+//refreshQueue = false;
+
 var prepareDOM = function() {
   $("body").empty().append([
     $("<div>").addClass("tsm_agent_wrapper"),
@@ -10,26 +21,31 @@ var prepareDOM = function() {
   ]);
   $("div.tsm_agent_wrapper").append(queueElement);
 }
-
-var agentRefreshRate = 5000;
-var buildRefreshRate = 300000;
-var queueRefreshRate = 1000;
-
-var refreshAgents = true;
-var refreshBuilds = true;
-var refreshQueue = true;
-//refreshAgents = false;
-//refreshBuilds = false;
-//refreshQueue = false;
-
 prepareDOM();
 
-//downloadAndDisplayQueue();
+loadConfig(function(items) {
+  buildRefreshRate = items.refreshRate * 1000;
+  successMessage = items.successMessage;
+  hideCursor = items.hideCursor;
+});
+
+chrome.storage.onChanged.addListener(function(changes, namespace) {
+  for (key in changes) {
+    var storageChange = changes[key];
+    switch (key) {
+      case "refreshRate":
+        buildRefreshRate = storageChange.newValue * 1000;
+        break;
+      case "successMessage":
+        successMessage = storageChange.newValue;
+        break;
+      case "hideCursor":
+        hideCursor = storageChange.newValue;
+        break;
+    }
+  }
+});
+
+downloadAndDisplayQueue();
 downloadAndDisplayAgents();
-//downloadAndDisplayBuilds();
-
-
-// These are the config options ready to use 
-// alert(refreshRate);
-// alert(successMessage);
-// alert(hideCursor);
+downloadAndDisplayBuilds();

@@ -1,7 +1,5 @@
 function saveConfig(items, callback) {
-  chrome.storage.local.set(items, function() {
-    callback();
-  });
+  chrome.storage.local.set(items, callback);
 };
 
 function loadConfig(callback) {
@@ -10,7 +8,5 @@ function loadConfig(callback) {
     refreshRate: 10,
     successMessage: "Everything is passing",
     hideCursor: false,
-  }, function(items) {
-    callback(items);
-  });
+  }, callback);
 };
