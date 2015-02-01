@@ -1,16 +1,3 @@
-var downloadAndDisplayQueue = function() {
-  ajaxGet("/httpAuth/app/rest/buildQueue", function(response) {
-    var queue = response.build;
-    var length = 0; 
-    if (queue !== undefined) {
-      length = queue.length;
-    }
-    
-    $(".tsm_queue_count").html(length);
-    if (refreshQueue & !handlingError) setTimeout(downloadAndDisplayQueue, queueRefreshRate);
-  });
-}
-
 var prepareDOM = function() {
   $("body").empty().append([
     $("<div>").addClass("tsm_agent_wrapper"),
@@ -25,8 +12,8 @@ var prepareDOM = function() {
 }
 
 var agentRefreshRate = 5000;
-var buildRefreshRate = 30000;
-var queueRefreshRate = 1500;
+var buildRefreshRate = 300000;
+var queueRefreshRate = 1000;
 
 var refreshAgents = true;
 var refreshBuilds = true;
@@ -37,9 +24,9 @@ var refreshQueue = true;
 
 prepareDOM();
 
-downloadAndDisplayQueue();
+//downloadAndDisplayQueue();
 downloadAndDisplayAgents();
-downloadAndDisplayBuilds();
+//downloadAndDisplayBuilds();
 
 
 // These are the config options ready to use 

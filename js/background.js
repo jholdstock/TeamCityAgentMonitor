@@ -13,5 +13,7 @@ var openTab = function(url, config) {
 	  chrome.tabs.executeScript(null, {file: "js/TeamCityDate.js"});
 	  chrome.tabs.executeScript(null, {file: "js/agent-updates.js"});
 	  chrome.tabs.executeScript(null, {file: "js/build-updates.js"});
+	  chrome.tabs.executeScript(null, {file: "js/queue-updates.js"});
+
 	  chrome.tabs.executeScript(null, {file: "js/main.js"});
 }

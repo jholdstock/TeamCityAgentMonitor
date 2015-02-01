@@ -2,9 +2,11 @@ var downloadAndDisplayAgents = function() {
   ajaxGet("/httpAuth/app/rest/agents", function(response) {
     var agentIds = response.agent;
     for (var i = 0; i < agentIds.length; i++) {
-      ajaxGet(agentIds[i].href, agentCallback)
+      ajaxGet(agentIds[i].href, agentCallback);
     }
-    if (refreshAgents & !handlingError) setTimeout(downloadAndDisplayAgents, agentRefreshRate);
+    if (refreshAgents & !handlingError) {
+      setTimeout(downloadAndDisplayAgents, agentRefreshRate);
+    }
   });
 }
 
