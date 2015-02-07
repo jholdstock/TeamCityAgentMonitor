@@ -18,18 +18,14 @@
 
   "icons": {
   	 "16": "icon/16x16.png",
-		 "24": "icon/24x24.png",
-		 "32": "icon/32x32.png",
 		 "48": "icon/48x48.png",
-		 "64": "icon/64x64.png",
-		 "96": "icon/96x96.png",
 		"128": "icon/128x128.png"
   },
 
   "browser_action": {
   	"default_icon": {                    
-    	"19": "icon/24x24.png",           
-  		"38": "icon/48x48.png"            
+    	"19": "icon/19x19.png",           
+  		"38": "icon/38x38.png"            
 	  },
     "default_title": "Open TeamCity Agent Monitor",
     "default_popup": "html/popup.html"
