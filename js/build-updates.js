@@ -8,8 +8,7 @@ var downloadAndDisplayBuilds = function() {
     var buildTypes = response.buildType;
     expectedBuilds = buildTypes.length;
     for (var i = 0; i < buildTypes.length; i++) {
-      ajaxGet("/httpAuth/app/rest/builds/?locator=count:1,canceled:false,running:false,buildType:id:" + buildTypes[i].id,
-       getBuildDetails(buildTypes[i]));
+      ajaxGet("/httpAuth/app/rest/builds/?locator=count:1,canceled:false,running:false,buildType:id:" + buildTypes[i].id, getBuildDetails(buildTypes[i]));
     }
   });
 };
@@ -32,31 +31,56 @@ var buildCallback = function(buildType) {
     receivedBuilds.push(build);
     
     if (receivedBuilds.length >= expectedBuilds) {
-      drawBuildStatus(receivedBuilds);
+      updateBottomPanel(receivedBuilds);
       if (refreshBuilds & !handlingError) setTimeout(downloadAndDisplayBuilds, buildRefreshRate);
     }
   };
 };
 
-var drawBuildStatus = function(builds) {
+var updateBottomPanel = function(builds) {
   removeBuildsWhichNoLongerExist(builds);
+  updateFailedAndNeverRunBuilds(builds);
+  if ($("div[id^=tsm_b_").length) {
+    $("div#tsm_success").remove();
+  }
+  else {
+    drawSuccessMessage();
+  }
+};
 
+var updateFailedAndNeverRunBuilds = function(builds) {
   for (var i = 0; i < builds.length; i++) {
     var build = builds[i];
 
+    var myBuild = {
+      name: build.buildType.projectName + " :: " + build.buildType.name,
+      id: "tsm_b_" + build.buildType.id,
+    };
+
     if (build.neverRun === true) {
-      drawNeverRunBuild(build.buildType);
+      myBuild.date = "";
+      myBuild.statusText = "Build has never run";
+      myBuild.color = "orange";
+
+      drawBuild(myBuild);
     }
     else if (build.status != "SUCCESS") {
-      drawFailedBuild(build);
+      var failureTime = new TeamCityDate(build.finishDate).getDate();
+      var interval = new TimeInterval(new Date(), failureTime);
+      var msg1 = interval.getFailureDateTime();
+      var msg2 = interval.getElapsedTime() + " ago";
+
+      myBuild.date = msg1 + "<br />" + msg2;
+      myBuild.statusText = build.statusText;
+      myBuild.color = "red";
+
+      drawBuild(myBuild);
     }
     else {
-      $("#tsm_b_" + build.buildType.id).remove();
+      $("div#"+myBuild.id).remove();
     }
-    
-    showSuccessIfAppropriate();
   }
-};
+}
 
 var removeBuildsWhichNoLongerExist = function(builds) {
   $.each($("div[id^=tsm_b_"), function(index, div) {
@@ -73,38 +97,5 @@ var removeBuildsWhichNoLongerExist = function(builds) {
     if (stillExists == false) { 
       div.remove();
     }
-  });
-}
-
-var showSuccessIfAppropriate = function() {
-  if ($("div[id^=tsm_b_").length) {
-    $("div#tsm_success").remove();
-  }
-  else {
-    var id = "tsm_success";
-    var wrapper = $("div.tsm_build_wrapper");
-    var existingElement = getElementIfExists(id, wrapper);
-
-    if (existingElement === undefined) {
-      existingElement = $("<div>").attr("id", id).addClass("tsm_green");
-      
-      existingElement.append([
-        $("<div>").addClass("tsm_success_msg tsm_border"),
-        $("<div>").addClass("tsm_success_time tsm_border")
-      ]);
-      
-      wrapper.append(existingElement);
-    }
-
-    $("div.tsm_success_msg", existingElement).html(successMessage);
-    ajaxGet("/httpAuth/app/rest/builds/?locator=count:1,canceled:false,running:false,status:failure", failedBuildCallback);
-  }
-}
-
-var failedBuildCallback = function(response) {
-  ajaxGet(response.build[0].href, function(response) {
-    var then = new TeamCityDate(response.finishDate).getDate();
-    var interval = new TimeInterval(new Date(), then);
-    $("div.tsm_success_time").html("Last failure was " + interval.getElapsedTime().toLowerCase() + " ago");
   });
 }

@@ -23,7 +23,6 @@ var prepareDOM = function() {
 }();
 
 var applyHideCursor = function(hideCursor) {
-  console.log(hideCursor);
   if (hideCursor) {
     $("body").css("cursor", "none");
   }
