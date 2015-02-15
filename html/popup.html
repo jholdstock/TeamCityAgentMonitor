@@ -16,6 +16,9 @@
     	p {
     		min-width: 25rem;
     	}
+    	input {
+    		margin : 0.5rem;
+    	}
     	#serverList {
     		min-width: 22rem;
     	}
@@ -40,7 +43,7 @@
 		<form id="addServer">
 			<h3>TeamCity URL:</h3>
 			<input required size="30" type="text" id="url" />
-			<br /><br />
+			<br />
 			<input type="submit" value="Test Connection" id="test" />&nbsp;&nbsp;<button class="showServersBtn">Cancel</button>
 			<div id="testStatus"></div>
 			<div id="saveDiv">
@@ -58,11 +61,12 @@
 			<h3>Settings</h3>
 			<br/>
 			<label for="refreshRate">Refresh rate (seconds):</label>&nbsp;<input type="text" size="5" id="refreshRate" />
-			<br /><br/>
+			<br />
 			<label for="successMessage">Success message:</label>&nbsp;<input type="text" id="successMessage" />
-			<br /><br/>
+			<br />
 			<label for="hideCursor">Hide cursor:</label>&nbsp;<input type="checkbox" id="hideCursor" />
 			<br />
+			<label for="showAgents">Show agent(s):</label>&nbsp;<input type="checkbox" id="showAgents" />
 			<br/>
 			<button id="saveSettingsBtn">Save</button>&nbsp;&nbsp;<button class="showServersBtn">Cancel</button> 
 			<label for"saveSettingsBtn" id="saveSettingsStatus"></label>

@@ -8,5 +8,6 @@ function loadConfig(callback) {
     refreshRate: 10,
     successMessage: "Everything is passing",
     hideCursor: false,
+    showAgents: true,
   }, callback);
 };

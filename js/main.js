@@ -9,18 +9,37 @@ var refreshQueue = true;
 //refreshBuilds = false;
 //refreshQueue = false;
 
+var start = function(items) {
+  //alert("Check auth");
+  applyHideCursor(items.hideCursor);
+
+  if (items.showAgents) {
+    prepareDOM_agents();
+    downloadAndDisplayAgents();gh 
+    
+    var queueElement = $("<div>").addClass("tsm_black");
+    queueElement.append([
+      $("<div>").addClass("tsm_queue_label").html("Queue Length"),
+      $("<div>").addClass("tsm_queue_count").html("0")
+    ]);
+    $("div.tsm_agent_wrapper").append(queueElement);
+
+    downloadAndDisplayQueue();
+  }
+  
+  buildRefreshRate = items.refreshRate * 1000;
+  successMessage = items.successMessage;
+  
+  downloadAndDisplayBuilds();
+}
+
 var prepareDOM = function() {
-  $("body").empty().append([
-    $("<div>").addClass("tsm_agent_wrapper"),
-    $("<div>").addClass("tsm_build_wrapper")
-  ]);
-  var queueElement = $("<div>").addClass("tsm_black");
-  queueElement.append([
-    $("<div>").addClass("tsm_queue_label").html("Queue Length"),
-    $("<div>").addClass("tsm_queue_count").html("0")
-  ]);
-  $("div.tsm_agent_wrapper").append(queueElement);
-}();
+  $("body").empty().append($("<div>").addClass("tsm_build_wrapper"));
+};
+
+var prepareDOM_agents = function() {
+  $(".tsm_build_wrapper").before($("<div>").addClass("tsm_agent_wrapper"));
+};
 
 var applyHideCursor = function(hideCursor) {
   if (hideCursor) {
@@ -29,13 +48,7 @@ var applyHideCursor = function(hideCursor) {
   else {
    $("body").css("cursor", "default"); 
   }
-}
-
-loadConfig(function(items) {
-  buildRefreshRate = items.refreshRate * 1000;
-  successMessage = items.successMessage;
-  applyHideCursor(items.hideCursor);
-});
+};
 
 chrome.storage.onChanged.addListener(function(changes, namespace) {
   for (key in changes) {
@@ -54,6 +67,5 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
   }
 });
 
-downloadAndDisplayQueue();
-downloadAndDisplayAgents();
-downloadAndDisplayBuilds();
+prepareDOM();
+loadConfig(start);

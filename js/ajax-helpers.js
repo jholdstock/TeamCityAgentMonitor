@@ -30,9 +30,9 @@ var testCallback = function(a,b) {
   $(".tsm_whiteout").remove();
   $(".tsm_bigAlert").remove();
 
-  downloadAndDisplayQueue();
-  downloadAndDisplayAgents();
-  downloadAndDisplayBuilds();  
+  // downloadAndDisplayQueue();
+  // downloadAndDisplayAgents();
+  // downloadAndDisplayBuilds();  
 }
 
 var attemptReconnect = function() {
