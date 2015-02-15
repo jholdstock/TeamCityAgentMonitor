@@ -1,0 +1,29 @@
+html {
+  font-size : 62.5%; 
+} 
+body { 
+  margin    : 1rem 2rem;
+  font-size : 1.4rem;
+  min-width: 25rem;
+}
+h3 {
+  margin: 0;
+  font-weight: 600;
+}
+p {
+}
+input {
+  margin : 1.0rem;
+}
+#serverList {
+  min-width: 22rem;
+}
+#testStatus {
+  margin: 1.0rem 0;
+}
+/*#url {
+  margin: 0.8rem 0 0;
+}*/
+#settings {
+  min-width: 35rem;
+}

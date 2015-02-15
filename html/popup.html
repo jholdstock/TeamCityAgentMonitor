@@ -1,37 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<style>
-			html {
-				font-size : 62.5%; 
-			} 
-    	body   { 
-				margin    : 1rem 2rem;
-				font-size : 1.4rem;
-    	}
-    	h3 {
-    		margin: 0;
-    		font-weight: 600;
-    	}
-    	p {
-    		min-width: 25rem;
-    	}
-    	input {
-    		margin : 0.5rem;
-    	}
-    	#serverList {
-    		min-width: 22rem;
-    	}
-    	#testStatus {
-				margin: 1.0rem 0;
-    	}
-    	#url {
-    		margin: 0.8rem 0 0;
-    	}
-    	#settings {
-    		min-width: 20rem;
-    	}
-  	</style>
+		<link rel="stylesheet" type="text/css" href="../css/popup.css">
 	</head>
 	<body>
 
@@ -60,13 +30,14 @@
 		<div id="settings">
 			<h3>Settings</h3>
 			<br/>
-			<label for="refreshRate">Refresh rate (seconds):</label>&nbsp;<input type="text" size="5" id="refreshRate" />
+			<label for="refreshRate">Refresh rate (seconds):</label>&nbsp;<input type="text" size="3" id="refreshRate" />
 			<br />
 			<label for="successMessage">Success message:</label>&nbsp;<input type="text" id="successMessage" />
 			<br />
 			<label for="hideCursor">Hide cursor:</label>&nbsp;<input type="checkbox" id="hideCursor" />
 			<br />
 			<label for="showAgents">Show agent(s):</label>&nbsp;<input type="checkbox" id="showAgents" />
+			<br/>
 			<br/>
 			<button id="saveSettingsBtn">Save</button>&nbsp;&nbsp;<button class="showServersBtn">Cancel</button> 
 			<label for"saveSettingsBtn" id="saveSettingsStatus"></label>
