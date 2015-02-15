@@ -11,7 +11,6 @@ var openTab = function(url) {
 	  chrome.tabs.executeScript(null, {file: "js/agent-updates.js"});
 	  chrome.tabs.executeScript(null, {file: "js/drawing.js"});
 	  chrome.tabs.executeScript(null, {file: "js/build-updates.js"});
-	  chrome.tabs.executeScript(null, {file: "js/queue-updates.js"});
 		chrome.tabs.executeScript(null, {file: "js/storage.js"});
 	  chrome.tabs.executeScript(null, {file: "js/main.js"});
 }

@@ -1,13 +1,10 @@
 var buildRefreshRate = 10000;
 var agentRefreshRate = 10000;
-var queueRefreshRate = 2000;
 
 var refreshAgents = true;
 var refreshBuilds = true;
-var refreshQueue = true;
 //refreshAgents = false;
 //refreshBuilds = false;
-//refreshQueue = false;
 
 var start = function(items) {
   //alert("Check auth");
@@ -15,16 +12,7 @@ var start = function(items) {
 
   if (items.showAgents) {
     prepareDOM_agents();
-    downloadAndDisplayAgents();gh 
-    
-    var queueElement = $("<div>").addClass("tsm_black");
-    queueElement.append([
-      $("<div>").addClass("tsm_queue_label").html("Queue Length"),
-      $("<div>").addClass("tsm_queue_count").html("0")
-    ]);
-    $("div.tsm_agent_wrapper").append(queueElement);
-
-    downloadAndDisplayQueue();
+    downloadAndDisplayAgents();
   }
   
   buildRefreshRate = items.refreshRate * 1000;
