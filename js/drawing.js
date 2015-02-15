@@ -61,7 +61,7 @@ var drawSuccessMessage = function() {
     $("div.tsm_build_wrapper").append(existingElement);
   }
 
-  $("div.tsm_success_msg", existingElement).html(successMessage);
+  $("div.tsm_success_msg", existingElement).html(greenMessage);
   ajaxGet("/httpAuth/app/rest/builds/?locator=count:1,canceled:false,running:false,status:failure", function(response) {
     ajaxGet(response.build[0].href, function(response2) {
       var then = new TeamCityDate(response2.finishDate).getDate();
