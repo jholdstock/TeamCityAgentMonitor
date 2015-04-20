@@ -7,24 +7,40 @@ var getElementIfExists = function(selector) {
   }
 }
 
+var sortElementsInWrapper = function(wrapper) {
+  var $buildWrapper = $(wrapper);
+  var $builds = $buildWrapper.children('div');
+
+  $builds.sort(function(a,b){
+    var an = a.getAttribute('data-name');
+    var bn = b.getAttribute('data-name');
+
+    return an.toUpperCase().localeCompare(bn.toUpperCase());
+  });
+
+  $builds.detach().appendTo($buildWrapper);  
+}
+
 var drawAgent = function(id, name, status, color) {
   var existingElement = getElementIfExists(id);
 
   if (existingElement === undefined) {
     existingElement = $("<div>").attr("id", id);
-    
+    existingElement.attr("data-name", name);
     existingElement.append([
       $("<div>").addClass("tsm_topLeft tsm_border"),
       $("<div>").addClass("tsm_topRight tsm_border"),
       $("<div>").addClass("tsm_bottomLeft tsm_translucent").html("AGENT")
     ]);
 
-    $(".tsm_agent_wrapper").append(existingElement);
+    $("div.tsm_agent_wrapper").append(existingElement);
   }
 
   $("div.tsm_topLeft", existingElement).html(name);
   $("div.tsm_topRight", existingElement).html(status);
   existingElement.removeClass().addClass(color);
+
+  sortElementsInWrapper("div.tsm_agent_wrapper");
 }
 
 var drawBuild = function(myBuild) {
@@ -32,6 +48,7 @@ var drawBuild = function(myBuild) {
 
   if (existingElement === undefined) {
     existingElement = $("<div>").attr("id", myBuild.id);
+    existingElement.attr("data-name", myBuild.name);
     existingElement.append([
       $("<div>").addClass("tsm_topLeft tsm_border"),
       $("<div>").addClass("tsm_topRight tsm_border"),
@@ -44,6 +61,7 @@ var drawBuild = function(myBuild) {
   $("div.tsm_topRight", existingElement).html(myBuild.date);
   $("div.tsm_bottomLeft", existingElement).html(myBuild.statusText);
   existingElement.removeClass().addClass("tsm_" + myBuild.color);
+  sortElementsInWrapper("div.tsm_build_wrapper");
 }
 
 var drawSuccessMessage = function() {
