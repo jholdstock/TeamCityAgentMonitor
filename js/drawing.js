@@ -8,25 +8,17 @@ var getElementIfExists = function(selector) {
 }
 
 var sortElementsInWrapper = function(wrapper) {
-  var $wrapper = $(wrapper);
-  var $elements = $wrapper.children('div');
+  var $buildWrapper = $(wrapper);
+  var $builds = $buildWrapper.children('div');
 
-  if ($elements.length <= 1){
-    return;
-  }
-
-  $elements.sort(function(a,b){
+  $builds.sort(function(a,b){
     var an = a.getAttribute('data-name');
     var bn = b.getAttribute('data-name');
-
-    if (an == null || bn == null) {
-      return 0;
-    }
 
     return an.toUpperCase().localeCompare(bn.toUpperCase());
   });
 
-  $elements.detach().appendTo($wrapper);  
+  $builds.detach().appendTo($buildWrapper);  
 }
 
 var drawAgent = function(id, name, status, color) {
