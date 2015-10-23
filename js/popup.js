@@ -9,9 +9,9 @@ loadConfig(function(items) {
   $('#successMessage').val(items.successMessage);
   $('#hideCursor').prop("checked", items.hideCursor);
   $('#showAgents').prop("checked", items.showAgents);
+  $('#showNeverRun').prop("checked", items.showNeverRun);
 	showServerList();
 });
-
 
 var showSettings = function() {
 	hideAll();
@@ -57,7 +57,7 @@ var showAddServer = function() {
 
 	hideSaveButtonAndTestStatusAndCredentials();
 	$("#addServer").show();
-	
+
 	$("#username").val("");
 	$("#password").val("");
 	

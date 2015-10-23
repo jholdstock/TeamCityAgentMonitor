@@ -4,6 +4,7 @@ $('#saveSettingsBtn').on('click', function() {
     successMessage: $('#successMessage').val(),
     hideCursor    : $('#hideCursor').prop("checked"),
     showAgents    : $('#showAgents').prop("checked"),
+    showNeverRun  : $('#showNeverRun').prop("checked"),
   }, function() {
     var status = $('#saveSettingsStatus');
     status.text("    Saved.");

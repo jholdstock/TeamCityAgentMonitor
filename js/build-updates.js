@@ -58,11 +58,15 @@ var updateFailedAndNeverRunBuilds = function(builds) {
     };
 
     if (build.neverRun === true) {
-      myBuild.date = "";
-      myBuild.statusText = "Build has never run";
-      myBuild.color = "orange";
+      if (showNeverRunBuilds) {
+        myBuild.date = "";
+        myBuild.statusText = "Build has never run";
+        myBuild.color = "orange";
 
-      drawBuild(myBuild);
+        drawBuild(myBuild);
+      } else {
+        $("div#"+myBuild.id).remove();  
+      }
     }
     else if (build.status != "SUCCESS") {
       var failureTime = new TeamCityDate(build.finishDate).getDate();
