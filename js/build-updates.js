@@ -16,26 +16,34 @@ var downloadAndDisplayBuilds = function() {
 var getBuildDetails = function(buildType) {
   return function(response) {
     if (response.build && response.build[0]) {
-      ajaxGet(response.build[0].href, buildCallback(buildType));  
+      var mostRecentBuild = response.build[0];
+      mostRecentBuild.buildType = buildType;
+      if (mostRecentBuild.status == "SUCCESS") {
+        receivedBuilds.push(mostRecentBuild);
+        checkIfAllBuildsReceived();
+      } else {
+        ajaxGet(mostRecentBuild.href, buildCallback);  
+      }
     }
     else {
       var neverRun = { neverRun: true, buildType: buildType };
       receivedBuilds.push(neverRun);
+      checkIfAllBuildsReceived();
     }
   }
 };
 
-var buildCallback = function(buildType) {
-  return function(build) {
-    build.buildType = buildType;
-    receivedBuilds.push(build);
-    
-    if (receivedBuilds.length >= expectedBuilds) {
+var buildCallback = function(build) {
+  receivedBuilds.push(build);
+  checkIfAllBuildsReceived();
+};
+
+var checkIfAllBuildsReceived = function() {
+  if (receivedBuilds.length >= expectedBuilds) {
       updateBottomPanel(receivedBuilds);
       if (refreshBuilds & !handlingError) setTimeout(downloadAndDisplayBuilds, buildRefreshRate);
     }
-  };
-};
+}
 
 var updateBottomPanel = function(builds) {
   removeBuildsWhichNoLongerExist(builds);
