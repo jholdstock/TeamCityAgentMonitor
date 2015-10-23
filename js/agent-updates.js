@@ -4,7 +4,7 @@ var downloadAndDisplayAgents = function() {
     for (var i = 0; i < agentIds.length; i++) {
       ajaxGet(agentIds[i].href, agentCallback);
     }
-    if (showAgents & refreshAgents & !handlingError) {
+    if (refreshAgents & !handlingError) {
       setTimeout(downloadAndDisplayAgents, agentRefreshRate);
     }
   });

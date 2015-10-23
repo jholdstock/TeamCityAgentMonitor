@@ -2,7 +2,6 @@ var buildRefreshRate;
 var agentRefreshRate = 5000;
 var greenMessage;
 var showNeverRunBuilds;
-var showAgents;
 
 var refreshAgents = true;
 var refreshBuilds = true;
@@ -29,6 +28,7 @@ var applyBuildRefreshRate = function(refreshRate) {
 }
 
 var applyShowAgents = function(showAgents) {
+  refreshAgents = showAgents;
   if (showAgents) {
     $(".tsm_build_wrapper").before($("<div>").addClass("tsm_agent_wrapper"));
     downloadAndDisplayAgents();
