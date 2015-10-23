@@ -1,6 +1,6 @@
 html, body, .tsm_agent_wrapper, .tsm_build_wrapper {
   font-size       : 10px;
-  background-color: black;
+  background-color: #111;
   font-family     : sans-serif;
   color           : white;
   width           : 100%;
@@ -16,7 +16,7 @@ body {
 .tsm_whiteout {
   z-index         : 999;
   background-color: rgba(255,255,255,.5);
-  position        :absolute;
+  position        : absolute;
   top             : 0;
   left            : 0;
   height          : 100%;
@@ -67,19 +67,19 @@ body {
 }
 
 .tsm_green {
-  background-color: #4cab4c;
+  background: linear-gradient(to bottom, #4cab4c 0%,#327032 100%);
 }
 
 .tsm_red {
-  background-color: #c0392b;
+  background: linear-gradient(to bottom,  #c0392b 0%,#932222 100%);
 }
 
 .tsm_orange {
-  background-color: #e67e22;
+  background: linear-gradient(to bottom, #D6671E 0%,#8A3D0C 100%);
 }
 
 .tsm_gray {
-  background-color: gray;
+  background: linear-gradient(to bottom,  #808080 0%,#5e5e5e 100%);
 }
 
 /*
@@ -96,7 +96,7 @@ body {
 
 .tsm_success_time {
   font-size: 3.0rem;
-  opacity: 0.5;
+  opacity  : 0.5;
 }
 
 .tsm_topRight, .tsm_topLeft, .tsm_bottomLeft, .tsm_bottomRight {
