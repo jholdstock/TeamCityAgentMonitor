@@ -89,10 +89,16 @@ var checkCreds = function() {
 	}
 
 	$.ajax({
-		url: enteredUrl()+"/httpAuth/app/rest/buildTypes",
-		headers: { Accept:"application/json", Authorization: "Basic " + enteredCreds() },
-		complete: credsCallback
-	});
+		url: enteredUrl()+"/ajax.html?logout=1",
+		complete: function() {
+			$.ajax({
+				url: enteredUrl()+"/httpAuth/app/rest/buildTypes",
+				headers: { Accept:"application/json", Authorization: "Basic " + enteredCreds() },
+				xhrFields: { withCredentials: true },
+				complete: credsCallback
+			});
+		},
+	});	
 }
 
 var credsCallback = function(a,b,c) {
