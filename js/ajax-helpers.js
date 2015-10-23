@@ -37,7 +37,7 @@ var testCallback = function(a,b) {
 var attemptReconnect = function() {
   $.ajax({
     url: tcUrl,
-    headers: { Accept:"application/json" },
+    headers: { Accept:"application/json", Authorization: tcCreds },
     complete: testCallback
   });
 }
@@ -45,7 +45,7 @@ var attemptReconnect = function() {
 var ajaxGet = function(url, callback) {
   $.ajax({
     url: tcUrl + url,
-    headers: { Accept:"application/json" },
+    headers: { Accept:"application/json", Authorization: tcCreds },
     success: callback,
     error: ajaxError
   });

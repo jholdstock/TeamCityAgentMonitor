@@ -8,7 +8,6 @@ var refreshBuilds = true;
 //refreshBuilds = false;
 
 var start = function(items) {
-  //alert("Check auth");
   applyHideCursor(items.hideCursor);
   applyShowAgents(items.showAgents);
   applyBuildRefreshRate(items.refreshRate);

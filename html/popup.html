@@ -10,16 +10,22 @@
 			<button class="addServerBtn">Yes</button>&nbsp;&nbsp;<button class="exit">No</button>
 		</div>
 
-		<form id="addServer">
+		<div id="addServer">
 			<h3>TeamCity URL:</h3>
 			<input required size="30" type="text" id="url" />
 			<br />
-			<input type="submit" value="Test Connection" id="test" />&nbsp;&nbsp;<button class="showServersBtn">Cancel</button>
-			<div id="testStatus"></div>
-			<div id="saveDiv">
-				<button id="saveServerBtn">Save</button>
+			<button id="test">Test Connection</button>&nbsp;&nbsp;<button class="showServersBtn">Cancel</button>
+			<div id="testStatus" class="status"></div>
+			<div id="credsDiv">
+				<label for="username">Username:</label>&nbsp;<input size="30" type="text"     id="username" />
+				<label for="password">Password:</label>&nbsp;<input size="30" type="password" id="password" />
+				<button id="checkCredsBtn">Check</button>
 			</div>
-		</form>
+			<div id="credsStatus" class="status"></div>
+			<div id="saveDiv">
+				<button id="saveServerBtn">Save Server</button>
+			</div>
+		</div>
 
 		<div id="serverList">
 		<h3>Choose a server</h3>

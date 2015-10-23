@@ -18,12 +18,11 @@ input {
 #serverList {
   min-width: 22rem;
 }
-#testStatus {
-  margin: 1.0rem 0;
-}
-/*#url {
-  margin: 0.8rem 0 0;
-}*/
 #settings {
   min-width: 35rem;
+}
+.status {
+  margin: 1.0rem 0;
+  font-weight: bold;
+  color: red;
 }
