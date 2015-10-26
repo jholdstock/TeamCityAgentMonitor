@@ -27,11 +27,11 @@ var drawAgent = function(id, name, status, color) {
   existingElement.removeClass().addClass(color);
 }
 
-var drawBuild = function(myBuild) {
-  var existingElement = getElementIfExists(myBuild.id);
+var drawBuild = function(build) {
+  var existingElement = getElementIfExists(build.getId());
 
   if (existingElement === undefined) {
-    existingElement = $("<div>").attr("id", myBuild.id);
+    existingElement = $("<div>").attr("id", build.getId());
     existingElement.append([
       $("<div>").addClass("tsm_topLeft tsm_border"),
       $("<div>").addClass("tsm_topRight tsm_border"),
@@ -40,10 +40,10 @@ var drawBuild = function(myBuild) {
     $("div.tsm_build_wrapper").append(existingElement);
   }
 
-  $("div.tsm_topLeft", existingElement).html(myBuild.name);
-  $("div.tsm_topRight", existingElement).html(myBuild.date);
-  $("div.tsm_bottomLeft", existingElement).html(myBuild.statusText);
-  existingElement.removeClass().addClass("tsm_" + myBuild.color);
+  $("div.tsm_topLeft", existingElement).html(build.getName());
+  $("div.tsm_topRight", existingElement).html(build.getDateAndTimeSince());
+  $("div.tsm_bottomLeft", existingElement).html(build.getStatus());
+  existingElement.removeClass().addClass("tsm_" + build.getColor());
 }
 
 var drawSuccessMessage = function() {

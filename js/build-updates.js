@@ -18,12 +18,7 @@ var getBuildDetails = function(buildType) {
     if (response.build && response.build[0]) {
       var mostRecentBuild = response.build[0];
       mostRecentBuild.buildType = buildType;
-      if (mostRecentBuild.status == "SUCCESS") {
-        receivedBuilds.push(mostRecentBuild);
-        checkIfAllBuildsReceived();
-      } else {
-        ajaxGet(mostRecentBuild.href, buildCallback);  
-      }
+      ajaxGet(mostRecentBuild.href, buildCallback);  
     }
     else {
       var neverRun = { neverRun: true, buildType: buildType };
@@ -59,37 +54,28 @@ var updateBottomPanel = function(builds) {
 var updateFailedAndNeverRunBuilds = function(builds) {
   for (var i = 0; i < builds.length; i++) {
     var build = builds[i];
+   
+    var temp = new Build(build);
 
-    var myBuild = {
-      name: build.buildType.projectName + " :: " + build.buildType.name,
-      id: "tsm_b_" + build.buildType.id,
-    };
-
-    if (build.neverRun === true) {
+    if (temp.neverRun() == true) {
       if (showNeverRunBuilds) {
-        myBuild.date = "";
-        myBuild.statusText = "Build has never run";
-        myBuild.color = "orange";
-
-        drawBuild(myBuild);
+        drawBuild(temp);
       } else {
-        $("div#"+myBuild.id).remove();  
+        $("div#"+temp.getId()).remove();  
+      }
+    }
+    else if (build.status == "SUCCESS" && temp.includesMuted()) {
+      if (true) {
+        drawBuild(temp);
+      } else {
+        $("div#"+temp.getId()).remove();  
       }
     }
     else if (build.status != "SUCCESS") {
-      var failureTime = new TeamCityDate(build.finishDate).getDate();
-      var interval = new TimeInterval(new Date(), failureTime);
-      var msg1 = interval.getFailureDateTime();
-      var msg2 = interval.getElapsedTime() + " ago";
-
-      myBuild.date = msg1 + "<br />" + msg2;
-      myBuild.statusText = build.statusText;
-      myBuild.color = "red";
-
-      drawBuild(myBuild);
+      drawBuild(temp);
     }
     else {
-      $("div#"+myBuild.id).remove();
+      $("div#"+temp.getId()).remove();
     }
   }
 }
