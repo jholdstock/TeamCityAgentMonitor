@@ -53,29 +53,11 @@ var updateBottomPanel = function(builds) {
 
 var updateFailedAndNeverRunBuilds = function(builds) {
   for (var i = 0; i < builds.length; i++) {
-    var build = builds[i];
-   
-    var temp = new Build(build);
-
-    if (temp.neverRun() == true) {
-      if (showNeverRunBuilds) {
-        drawBuild(temp);
-      } else {
-        $("div#"+temp.getId()).remove();  
-      }
-    }
-    else if (build.status == "SUCCESS" && temp.includesMuted()) {
-      if (true) {
-        drawBuild(temp);
-      } else {
-        $("div#"+temp.getId()).remove();  
-      }
-    }
-    else if (build.status != "SUCCESS") {
-      drawBuild(temp);
-    }
-    else {
-      $("div#"+temp.getId()).remove();
+    var build = new Build(builds[i]);
+    if (build.shouldBeDrawn()) {
+      drawBuild(build);
+    } else {
+      $("div#"+build.getId()).remove();
     }
   }
 }

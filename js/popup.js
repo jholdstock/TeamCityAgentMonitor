@@ -10,6 +10,7 @@ loadConfig(function(items) {
   $('#hideCursor').prop("checked", items.hideCursor);
   $('#showAgents').prop("checked", items.showAgents);
   $('#showNeverRun').prop("checked", items.showNeverRun);
+  $('#showMuted').prop("checked", items.showMuted);
 	showServerList();
 });
 

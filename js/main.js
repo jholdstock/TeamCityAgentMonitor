@@ -2,6 +2,7 @@ var buildRefreshRate;
 var agentRefreshRate = 5000;
 var greenMessage;
 var showNeverRunBuilds;
+var showMutedBuilds;
 var showAgents;
 
 var refreshAgents = true;
@@ -13,6 +14,7 @@ var start = function(items) {
   applyHideCursor(items.hideCursor);
   applyShowAgents(items.showAgents);
   applyShowNeverRun(items.showNeverRun);
+  applyShowMuted(items.showMuted);
   applyBuildRefreshRate(items.refreshRate);
   applySuccessMessage(items.successMessage);
   
@@ -42,6 +44,10 @@ var applyShowNeverRun = function(showNeverRun) {
   showNeverRunBuilds = showNeverRun;
 }
 
+var applyShowMuted = function(showMuted) {
+  showMutedBuilds = showMuted;
+}
+
 var applyHideCursor = function(hideCursor) {
   if (hideCursor) {
     $("body").css("cursor", "none");
@@ -66,6 +72,9 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
         break;
       case "showAgents":
         applyShowAgents(newValue);
+        break;
+      case "showMuted":
+        applyShowMuted(newValue);
         break;
       case "showNeverRun":
         applyShowNeverRun(newValue);

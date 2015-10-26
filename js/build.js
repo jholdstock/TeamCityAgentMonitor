@@ -5,6 +5,34 @@ function Build(rawBuild) {
 		this.rawBuild = rawBuild;
 	};
 
+	this.shouldBeDrawn = function() {
+		if (this.neverRun()) {
+			if (showNeverRunBuilds) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		if (this.successful() && this.includesMuted()) { 
+			if (showMutedBuilds) { 
+				return true;
+			} else {
+				return false;
+			} 
+		} 
+
+		if (this.successful() == false) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	this.successful = function() {
+		return rawBuild.status == "SUCCESS";
+	}
+
 	this.getDateAndTimeSince = function() {
 		if (this.neverRun()) {
 			return "";
