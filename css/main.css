@@ -16,7 +16,7 @@ body {
 .tsm_init {
   font-size : 4rem;
   text-align: center;
-  padding   : 6rem;
+  padding   : 1rem;
 }
 
 @keyframes dots-1 { from { opacity: 0; } 25% { opacity: 1; } }

@@ -32,7 +32,10 @@ var applyBuildRefreshRate = function(refreshRate) {
 
 var applyShowAgents = function(showAgents) {
   if (showAgents) {
-    $(".tsm_build_wrapper").before($("<div>").addClass("tsm_agent_wrapper"));
+    var msg = $("<div>").addClass("tsm_init tsm_border").html("Getting agent information<span class='dots'><span>.</span><span>.</span><span>.</span></span>");
+    var pending = $("<div>").addClass("tsm_gray").attr("id", "tsm_agent_init").append(msg);
+
+    $(".tsm_build_wrapper").before($("<div>").addClass("tsm_agent_wrapper").append(pending));
     downloadAndDisplayAgents();
   }
   else {

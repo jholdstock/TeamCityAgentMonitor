@@ -11,6 +11,7 @@ var downloadAndDisplayAgents = function() {
 }
 
 var agentCallback = function(agent) {
+  $("#tsm_agent_init").remove();
   var connected = agent.connected;
   var enabled = agent.enabled;
   var status = "";
