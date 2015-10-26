@@ -41,6 +41,7 @@ var checkIfAllBuildsReceived = function() {
 }
 
 var updateBottomPanel = function(builds) {
+  $("#tsm_build_init").remove();
   removeBuildsWhichNoLongerExist(builds);
   updateFailedAndNeverRunBuilds(builds);
   if ($("div[id^=tsm_b_").length) {

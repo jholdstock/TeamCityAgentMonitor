@@ -85,7 +85,9 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
 
 var prepareDOM = function() {
   $(document).prop('title', 'TeamCity Status Monitor')
-  $("body").empty().append($("<div>").addClass("tsm_build_wrapper"));
+  var msg = $("<div>").addClass("tsm_init tsm_border").html("Getting build information<span class='dots'><span>.</span><span>.</span><span>.</span></span>");
+  var pending = $("<div>").addClass("tsm_gray").attr("id", "tsm_build_init").append(msg);
+  $("body").empty().append($("<div>").addClass("tsm_build_wrapper").append(pending));
 };
 
 prepareDOM();
