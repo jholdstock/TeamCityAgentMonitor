@@ -1,5 +1,5 @@
 var hideAll = function() {
-	$("#noServers, #serverList, #addServer, #settings").hide();	
+	$("#noServers, #serverList, #addServer, #settings, #projectList").hide();	
 }
 hideAll();
 
@@ -17,6 +17,13 @@ loadConfig(function(items) {
 var showSettings = function() {
 	hideAll();
 	$("#settings").show();
+}
+
+var allBtnClicked = function() {
+	$("#projectList input").prop("checked", "checked")
+}
+var noneBtnClicked = function() {
+	$("#projectList input").prop("checked", "")
 }	
 
 var showServerList = function() {
@@ -46,6 +53,13 @@ var showServerList = function() {
 				.click(deleteButtonClick(servers, index))
 			);
 
+		var editBtn = $("<td>").append(
+			$("<button>")
+				.text("Edit")
+				.click(editButtonClick(servers, index))
+			);
+
+		//$("<tr>").append([name, viewBtn, delBtn, editBtn]).appendTo(serverTable);
 		$("<tr>").append([name, viewBtn, delBtn]).appendTo(serverTable);
 	});
 	
@@ -59,6 +73,29 @@ var serverButtonClick = function(url, creds) {
 		chrome.extension.getBackgroundPage().openTab(url, creds);
     	exit();
 	};
+}
+
+var editButtonClick = function(servers, i) {
+	return function() {
+		hideAll();
+		$("#projectCheckboxes").empty();
+
+		$.ajax({
+			url: servers[i].url + "/httpAuth/app/rest/projects",
+			headers: { Accept:"application/json", Authorization: "Basic " + servers[i].creds },
+		}).done(projectsCallback);
+	};
+}
+
+var projectsCallback = function(a,b,c) {
+	var projects = []
+	for (var i = 0; i < a.project.length; i++) {
+		var checkbox = $("<input type='checkbox'>");
+		var label = $("<label>").html("" + a.project[i].name.replace("<", "&lt;").replace(">", "&gt;"));
+		var br = $("<br>");
+		$("#projectCheckboxes").append([checkbox, label, br]);
+	}
+	$("#projectList").show();
 }
 
 var deleteButtonClick = function(servers, i) {
@@ -100,6 +137,8 @@ $("#checkCredsBtn").click(checkCreds);
 $(".showServersBtn").click(showServerList);
 $(".settingsBtn").click(showSettings);
 $("#test").click(testConnection);
+$("#allBtn").click(allBtnClicked);
+$("#noneBtn").click(noneBtnClicked);
 $("#url").keydown(urlInputChanged).change(urlInputChanged);
 $("#username").keydown(credsInputChanged).change(credsInputChanged);
 $("#password").keydown(credsInputChanged).change(credsInputChanged);

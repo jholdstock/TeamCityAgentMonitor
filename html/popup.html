@@ -28,9 +28,20 @@
 		</div>
 
 		<div id="serverList">
-		<h3>Choose a server</h3>
+			<h3>Choose a server</h3>
 			<div id="serverLinks"></div>
-			<button class="addServerBtn">Add New</button>&nbsp;&nbsp;<button class="settingsBtn">Settings</button>&nbsp;&nbsp;<button class="exit">Close</button>
+			<!-- TODO - use id on buttons and not class -->
+			<button class="addServerBtn">Add New</button>&nbsp;&nbsp;
+			<button class="settingsBtn">Settings</button>&nbsp;&nbsp;
+			<button class="exit">Close</button>
+		</div>
+
+		<div id="projectList">
+			<h3>Choose projects to monitor</h3>
+			<button id="allBtn">Select all</button>&nbsp;&nbsp;
+			<button id="noneBtn">Select none</button>
+			<div id="projectCheckboxes"></div>
+			<button class="showServersBtn">Cancel</button> 
 		</div>
 
 		<div id="settings">
