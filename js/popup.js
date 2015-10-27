@@ -59,8 +59,7 @@ var showServerList = function() {
 				.click(editButtonClick(servers, index))
 			);
 
-		//$("<tr>").append([name, viewBtn, delBtn, editBtn]).appendTo(serverTable);
-		$("<tr>").append([name, viewBtn, delBtn]).appendTo(serverTable);
+		$("<tr>").append([name, viewBtn, delBtn, editBtn]).appendTo(serverTable);
 	});
 	
 	$("#serverLinks").append(serverTable);
@@ -73,29 +72,6 @@ var serverButtonClick = function(url, creds) {
 		chrome.extension.getBackgroundPage().openTab(url, creds);
     	exit();
 	};
-}
-
-var editButtonClick = function(servers, i) {
-	return function() {
-		hideAll();
-		$("#projectCheckboxes").empty();
-
-		$.ajax({
-			url: servers[i].url + "/httpAuth/app/rest/projects",
-			headers: { Accept:"application/json", Authorization: "Basic " + servers[i].creds },
-		}).done(projectsCallback);
-	};
-}
-
-var projectsCallback = function(a,b,c) {
-	var projects = []
-	for (var i = 0; i < a.project.length; i++) {
-		var checkbox = $("<input type='checkbox'>");
-		var label = $("<label>").html("" + a.project[i].name.replace("<", "&lt;").replace(">", "&gt;"));
-		var br = $("<br>");
-		$("#projectCheckboxes").append([checkbox, label, br]);
-	}
-	$("#projectList").show();
 }
 
 var deleteButtonClick = function(servers, i) {
