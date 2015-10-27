@@ -110,6 +110,7 @@ $(".exit").click(exit);
 $(".showServersBtn").click(showServerList);
 $("#addServerBtn").click(showAddServer);
 $("#saveServerBtn").click(saveNewServer);
+$("#saveProjectsBtn").click(saveProjects);
 $("#checkCredsBtn").click(checkCreds);
 $("#settingsBtn").click(showSettings);
 $("#test").click(testConnection);
