@@ -19,7 +19,7 @@ var drawAgent = function(id, name, status, color) {
       $("<div>").addClass("tsm_bottomLeft tsm_translucent").html("AGENT")
     ]);
 
-    $(".tsm_agent_wrapper").append(existingElement);
+    $("#tsm_agent_wrapper").append(existingElement);
   }
 
   $("div.tsm_topLeft", existingElement).html(name);
@@ -37,7 +37,7 @@ var drawBuild = function(build) {
       $("<div>").addClass("tsm_topRight tsm_border"),
       $("<div>").addClass("tsm_bottomLeft tsm_border tsm_translucent")
     ]);
-    $("div.tsm_build_wrapper").append(existingElement);
+    $("div#tsm_build_wrapper").append(existingElement);
   }
 
   $("div.tsm_topLeft", existingElement).html(build.getName());
@@ -54,19 +54,19 @@ var drawSuccessMessage = function() {
     existingElement = $("<div>").attr("id", id).addClass("tsm_green");
     
     existingElement.append([
-      $("<div>").addClass("tsm_success_msg tsm_border"),
-      $("<div>").addClass("tsm_success_time tsm_border")
+      $("<div>").attr("id", "tsm_success_msg").addClass("tsm_border"),
+      $("<div>").attr("id", "tsm_success_time").addClass("tsm_border")
     ]);
     
-    $("div.tsm_build_wrapper").append(existingElement);
+    $("div#tsm_build_wrapper").append(existingElement);
   }
 
-  $("div.tsm_success_msg", existingElement).html(greenMessage);
+  $("div#tsm_success_msg", existingElement).html(greenMessage);
   ajaxGet("/httpAuth/app/rest/builds/?locator=count:1,canceled:false,running:false,status:failure", function(response) {
     ajaxGet(response.build[0].href, function(response2) {
       var then = new TeamCityDate(response2.finishDate).getDate();
       var interval = new TimeInterval(new Date(), then);
-      $("div.tsm_success_time").html("Last failure was " + interval.getElapsedTime().toLowerCase() + " ago");
+      $("div#tsm_success_time").html("Last failure was " + interval.getElapsedTime().toLowerCase() + " ago");
     });
   });
 }

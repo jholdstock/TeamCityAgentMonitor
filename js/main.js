@@ -23,7 +23,7 @@ var start = function(items) {
 
 var applySuccessMessage = function(successMessage) {
   greenMessage = successMessage;
-  $(".tsm_success_msg").html(successMessage);
+  $("#tsm_success_msg").html(successMessage);
 }
 
 var applyBuildRefreshRate = function(refreshRate) {
@@ -35,11 +35,11 @@ var applyShowAgents = function(showAgents) {
     var msg = $("<div>").addClass("tsm_init tsm_border").html("Getting agent information<span class='dots'><span>.</span><span>.</span><span>.</span></span>");
     var pending = $("<div>").addClass("tsm_gray").attr("id", "tsm_agent_init").append(msg);
 
-    $(".tsm_build_wrapper").before($("<div>").addClass("tsm_agent_wrapper").append(pending));
+    $("#tsm_build_wrapper").before($("<div>").attr("id", "tsm_agent_wrapper").append(pending));
     downloadAndDisplayAgents();
   }
   else {
-    $(".tsm_agent_wrapper").remove();
+    $("#tsm_agent_wrapper").remove();
   }
 }
 
@@ -63,6 +63,8 @@ var applyHideCursor = function(hideCursor) {
 chrome.storage.onChanged.addListener(function(changes, namespace) {
   for (key in changes) {
     var newValue = changes[key].newValue;
+    // TODO remove when worked out why tsm_agent_wrapper appears sometimes while changing config
+    console.log("config change. key: '" + key + "'. new value: '" + newValue + "'.");
     switch (key) {
       case "refreshRate":
         applyBuildRefreshRate(newValue);
@@ -90,7 +92,7 @@ var prepareDOM = function() {
   $(document).prop('title', 'TeamCity Status Monitor')
   var msg = $("<div>").addClass("tsm_init tsm_border").html("Getting build information<span class='dots'><span>.</span><span>.</span><span>.</span></span>");
   var pending = $("<div>").addClass("tsm_gray").attr("id", "tsm_build_init").append(msg);
-  $("body").empty().append($("<div>").addClass("tsm_build_wrapper").append(pending));
+  $("body").empty().append($("<div>").attr("id", "tsm_build_wrapper").append(pending));
 };
 
 prepareDOM();

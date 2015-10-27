@@ -1,4 +1,4 @@
-html, body, .tsm_agent_wrapper, .tsm_build_wrapper {
+html, body, #tsm_agent_wrapper, #tsm_build_wrapper {
   font-size       : 10px;
   background-color: #111;
   font-family     : sans-serif;
@@ -57,14 +57,14 @@ body {
   border-radius   : 3rem;
 }
 
-.tsm_agent_wrapper {
+#tsm_agent_wrapper {
   display       : flex;
   flex-grow     : 0.15;
   height        : 15%;
   flex-direction: row;  
 }
 
-.tsm_build_wrapper {
+#tsm_build_wrapper {
   display       : flex;
   flex-grow     : 0.85;
   height        : 85%;
@@ -105,15 +105,15 @@ body {
      Text divs
 */
 
-.tsm_success_msg, .tsm_success_time {
+#tsm_success_msg, #tsm_success_time {
   text-align: center;
 }
 
-.tsm_success_msg {
+#tsm_success_msg {
   font-size: 4.5rem;
 }
 
-.tsm_success_time {
+#tsm_success_time {
   font-size: 3.0rem;
   opacity  : 0.5;
 }

@@ -130,12 +130,12 @@ var exit = function() {
 	window.close();
 }
 
-$(".addServerBtn").click(showAddServer);
 $(".exit").click(exit);
+$(".showServersBtn").click(showServerList);
+$("#addServerBtn").click(showAddServer);
 $("#saveServerBtn").click(saveNewServer);
 $("#checkCredsBtn").click(checkCreds);
-$(".showServersBtn").click(showServerList);
-$(".settingsBtn").click(showSettings);
+$("#settingsBtn").click(showSettings);
 $("#test").click(testConnection);
 $("#allBtn").click(allBtnClicked);
 $("#noneBtn").click(noneBtnClicked);
