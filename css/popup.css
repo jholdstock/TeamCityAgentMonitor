@@ -1,28 +1,40 @@
 html {
-  font-size : 62.5%; 
+  font-size: 62.5%; 
 } 
+
 body { 
-  margin    : 1rem 2rem;
-  font-size : 1.4rem;
+  margin   : 1rem 2rem;
+  font-size: 1.4rem;
   min-width: 25rem;
 }
+
 h3 {
-  margin: 0;
+  margin     : 0;
   font-weight: 600;
 }
-p {
-}
+
 input {
   margin : 1.0rem;
 }
+
 #serverList {
   min-width: 22rem;
 }
+
+td.serverName {
+  padding: 1rem 0;
+}
+
+#serverTable {
+  padding: 0.5rem 0 1rem;
+}
+
 #settings {
   min-width: 35rem;
 }
+
 .status {
-  margin: 1.0rem 0;
+  margin     : 1.0rem 0;
   font-weight: bold;
-  color: red;
+  color      : red;
 }

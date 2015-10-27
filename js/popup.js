@@ -27,22 +27,30 @@ var showServerList = function() {
 	} 
 
 	$("#serverLinks").empty();
-	$("<table>").attr("id", "serverTable").css("padding", "0.5rem 0 1rem").appendTo($("#serverLinks"));
+	var serverTable = $("<table>").attr("id", "serverTable");
 	$.each(servers, function(index, server){
 		var name = $("<td>")
+			.addClass("serverName")
 			.text(server.url)
-			.append("&nbsp;&nbsp;&nbsp;")
-			.css("padding", "1rem 0");
+			.append("&nbsp;&nbsp;&nbsp;");
 
-		var button = $("<td>").append(
+		var viewBtn = $("<td>").append(
 			$("<button>")
 				.text("View")
 				.click(serverButtonClick(server.url, server.creds))
 			);
 
-		$("<tr>").append([name, button]).appendTo($("#serverTable"));
+		var delBtn = $("<td>").append(
+			$("<button>")
+				.text("Delete")
+				.click(deleteButtonClick(servers, index))
+			);
+
+		$("<tr>").append([name, viewBtn, delBtn]).appendTo(serverTable);
 	});
 	
+	$("#serverLinks").append(serverTable);
+
 	$("#serverList").show();
 }
 
@@ -50,6 +58,14 @@ var serverButtonClick = function(url, creds) {
 	return function() {
 		chrome.extension.getBackgroundPage().openTab(url, creds);
     	exit();
+	};
+}
+
+var deleteButtonClick = function(servers, i) {
+	return function() {
+		servers = servers.splice(i, 1);
+		saveConfig({servers:servers}, function() {});
+		showServerList();
 	};
 }
 
