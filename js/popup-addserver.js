@@ -31,13 +31,26 @@ var testConnection = function(event) {
     return;
   }
 
+  var url = enteredUrl();
+  var matchFound = false;
+  $.each(servers, function(i, el){
+    if (el.url == url) {
+      matchFound = true;
+    }
+  });
+
+  if (matchFound) {
+    alert("This server has already been added!");
+    return;
+  }
+
   hideSaveButtonAndTestStatusAndCredentials();
   $("#test").attr("disabled", true);
   $("#url").attr("disabled", true);
   updateTestStatus("Connecting...");
 
   $.ajax({
-    url: enteredUrl(),
+    url: url,
     headers: { Accept:"application/json" },
     complete: testCallback
   });
