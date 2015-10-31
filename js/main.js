@@ -3,7 +3,7 @@ var agentRefreshRate = 5000;
 var greenMessage;
 var showNeverRunBuilds;
 var showMutedBuilds;
-var showAgents;
+var showingAgents;
 var server;
 
 var refreshAgents = true;
@@ -37,8 +37,8 @@ var applyBuildRefreshRate = function(refreshRate) {
   buildRefreshRate = refreshRate * 1000;
 }
 
-var applyShowAgents = function(showAgents) {
-  if (showAgents) {
+var applyShowAgents = function(newShowAgents) {
+  if (newShowAgents & !showingAgents) {
     var msg = $("<div>").addClass("tsm_init tsm_border").html("Getting agent information<span class='dots'><span>.</span><span>.</span><span>.</span></span>");
     var pending = $("<div>").addClass("tsm_gray").attr("id", "tsm_agent_init").append(msg);
 
@@ -48,6 +48,7 @@ var applyShowAgents = function(showAgents) {
   else {
     $("#tsm_agent_wrapper").remove();
   }
+  showingAgents = newShowAgents;
 }
 
 var applyShowNeverRun = function(showNeverRun) {
@@ -70,8 +71,6 @@ var applyHideCursor = function(hideCursor) {
 chrome.storage.onChanged.addListener(function(changes, namespace) {
   for (key in changes) {
     var newValue = changes[key].newValue;
-    // TODO remove when worked out why tsm_agent_wrapper appears sometimes while changing config
-    console.log("config change. key: '" + key + "'. new value: '" + newValue + "'.");
     switch (key) {
       case "refreshRate":
         applyBuildRefreshRate(newValue);
