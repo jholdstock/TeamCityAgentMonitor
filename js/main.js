@@ -59,14 +59,31 @@ var applyShowMuted = function(showMuted) {
   showMutedBuilds = showMuted;
 }
 
-var applyHideCursor = function(hideCursor) {
-  if (hideCursor) {
-    $("body").css("cursor", "none");
-  }
-  else {
-    $("body").css("cursor", "default"); 
-  }
+var applyHideCursor = function(newHideCursor) {
+  shouldHideCursor = newHideCursor;
 };
+
+var shouldHideCursor;
+var justHidden = false;
+
+var j;
+$(document).mousemove(function() {
+    if (!justHidden) {
+        justHidden = false;
+        clearTimeout(j);
+        $('html').css({cursor: 'default'});
+        j = setTimeout(hide, 1000);
+    }
+});
+function hide() {
+  if (shouldHideCursor) {
+    $('html').css({cursor: 'none'});
+  }
+  justHidden = true;
+  setTimeout(function() {
+    justHidden = false;
+  }, 500);
+}
 
 chrome.storage.onChanged.addListener(function(changes, namespace) {
   for (key in changes) {
