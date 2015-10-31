@@ -68,8 +68,8 @@ body {
   flex-grow     : 0.80;
   height        : 80%;
   flex-direction: column;
-  overflow-x     : hidden;  
-  overflow-y     : auto;  
+  overflow-x    : hidden;  
+  overflow-y    : auto;  
 }
 #tsm_summary_wrapper {
   display       : flex;

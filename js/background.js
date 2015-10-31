@@ -15,4 +15,5 @@ var openTab = function(server) {
 	chrome.tabs.executeScript(null, {file: "js/build-updates.js"});
 	chrome.tabs.executeScript(null, {file: "js/storage.js"});
 	chrome.tabs.executeScript(null, {file: "js/main.js"});
+	chrome.tabs.executeScript(null, {file: "js/clock.js"});
 }
