@@ -89,6 +89,13 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
   for (key in changes) {
     var newValue = changes[key].newValue;
     switch (key) {
+      case "servers":
+        for (index in newValue) {
+          if (tcUrl == newValue[index].url) {
+            server = newValue[index];
+          }
+        }
+        break;
       case "refreshRate":
         applyBuildRefreshRate(newValue);
         break;
