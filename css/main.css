@@ -81,10 +81,16 @@ body {
 /*
      Background divs
 */
-.tsm_summary {
+#tsm_clock {
+  text-align: right;
+}
+#tsm_summary {
+  text-align: left;
+}
+.tsm_summary_text {
+  padding    : 0 2rem;
   width      : 100%;
   font-weight: 300;
-  text-align : center;
   font-size  : 2.5rem;
   color      : #bbb;
 }

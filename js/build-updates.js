@@ -31,7 +31,7 @@ var updateSummary = function(builds, projects) {
   if (builds > 1) summary += " builds"; else summary += " build";
   summary += " in " + projects;
   if (projects > 1) summary += " projects"; else summary += " project";
-  $(".tsm_summary").html(summary);
+  $("#tsm_summary").html(summary);
 }
 
 var getBuildDetails = function(buildType) {

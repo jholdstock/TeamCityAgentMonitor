@@ -117,8 +117,9 @@ var prepareDOM = function() {
   var pending = $("<div>").addClass("tsm_gray").attr("id", "tsm_build_init").append(msg);
   $("body").empty().append($("<div>").attr("id", "tsm_build_wrapper").append(pending));
   var summaryWrapper = $("<div>").attr("id", "tsm_summary_wrapper");
-  var summary = $("<div>").addClass("tsm_summary");
-  summaryWrapper.append(summary);
+  var summary = $("<div>").attr("id", "tsm_summary").addClass("tsm_summary_text");
+  var clock = $("<div>").attr("id", "tsm_clock").addClass("tsm_summary_text");
+  summaryWrapper.append(summary).append(clock);
   $("body").append(summaryWrapper);
 };
 
@@ -133,3 +134,52 @@ prepareDOM();
 // }).done(function() {
      loadConfig(start);
 // });
+
+
+function updateClock ( )
+  {
+  var currentTime = new Date ( );
+    var currentHours = currentTime.getHours ( );
+    var currentMinutes = currentTime.getMinutes ( );
+    var currentSeconds = currentTime.getSeconds ( );
+
+    // Pad the minutes and seconds with leading zeros, if required
+    currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
+    currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
+
+    // Compose the string for display
+    var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds;
+    
+    $("#tsm_clock").html(getPrettyDate() + " " + currentTimeString);
+    
+ }
+
+$(document).ready(function()
+{
+  updateClock();
+  setInterval('updateClock()', 1000);
+});
+
+var getPrettyDate = function() {
+  var monthNames = [
+    "January", "February", "March",
+    "April", "May", "June", "July",
+    "August", "September", "October",
+    "November", "December"
+  ];
+
+  var date = new Date();
+  var day = date.getDate();
+  var monthIndex = date.getMonth();
+  var year = date.getFullYear();
+
+  console.log(day, monthNames[monthIndex], year);
+
+  var date = new Date();
+  var day = date.getDate();
+  var monthIndex = date.getMonth();
+  var year = date.getFullYear();
+
+  console.log(day, monthNames[monthIndex], year);
+  return day + ' ' + monthNames[monthIndex] + ' ' + year;
+}
