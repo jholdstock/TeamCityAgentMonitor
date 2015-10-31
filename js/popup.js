@@ -108,8 +108,8 @@ var exit = function() {
 
 $(".exit").click(exit);
 $(".showServersBtn").click(showServerList);
-$("#addServerBtn").click(showAddServer);
-$("#saveServerBtn").click(saveNewServer);
+$(".addServerBtn").click(showAddServer);
+$("#chooseProjectsBtn").click(chooseProjects);
 $("#saveProjectsBtn").click(saveProjects);
 $("#checkCredsBtn").click(checkCreds);
 $("#settingsBtn").click(showSettings);

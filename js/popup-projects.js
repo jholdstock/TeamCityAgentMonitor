@@ -1,4 +1,5 @@
 var selectedServer;
+var editingExistingProjectPreferences = false;
 
 var editButtonClick = function(servers, i) {
 	return function() {
@@ -6,6 +7,7 @@ var editButtonClick = function(servers, i) {
 		$("#projectCheckboxes").empty();
 
 		selectedServer = i;
+		editingExistingProjectPreferences = true;
 		
 		$.ajax({
 			url: servers[i].url + "/httpAuth/app/rest/projects",
@@ -36,23 +38,47 @@ var projectsCallback = function(a,b,c) {
 }
 
 var saveProjects = function() {
+	var checked = false;
+	$.each($("div#projectCheckboxes input:checked"), function(i, el) {
+		checked = true;
+	});
+
+	if (checked == false) {
+		alert("You must choose at least one project");
+		return;
+	}
+	
+	var server;
+	if (editingExistingProjectPreferences) {
+		server = servers[selectedServer];
+	} else {
+		server = {
+			url:enteredUrl(),
+			creds:enteredCreds(),
+		};
+
+		servers.push(server);
+	}
+	
 	var selectedProjects = [];
 	$.each($("div#projectCheckboxes input:checked"), function(i, el) {
 		selectedProjects.push($(el).prop("tsm_pid"));
 	});
-
-	servers[selectedServer].projects = selectedProjects;
+	server.projects = selectedProjects;
 	saveConfig({servers:servers}, function() {});
+
 	showServerList();
 }
 
 var loadFromStorage = function() {
-	var saved = servers[selectedServer].projects;
-	if (saved) {
-		$.each(saved, function(i, el) {
-			$("#tsm_bk_" + el).prop("checked", "checked");
-		});
-	} else {
-		$("div#projectCheckboxes input").prop("checked", "checked");
+	if (editingExistingProjectPreferences) {
+		var saved = servers[selectedServer].projects;
+		if (saved) {
+			$.each(saved, function(i, el) {
+				$("#tsm_bk_" + el).prop("checked", "checked");
+			});
+			return;
+		}
 	}
+	$("div#projectCheckboxes input").prop("checked", "checked");
 }

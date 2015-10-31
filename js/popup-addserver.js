@@ -92,25 +92,22 @@ var enteredCreds = function() {
   return btoa(username+":"+password);
 }
 
-var saveNewServer = function() {
-  var server = {
-    url:enteredUrl(),
-    creds:enteredCreds(),
-  };
-
-  servers.push(server);
-
-  saveConfig({servers:servers}, function() {});
-
-  $("#addServer").hide();
-    showServerList();
+var chooseProjects = function() {
+  hideAll();
+  editingExistingProjectPreferences = false;
+  $("#projectCheckboxes").empty();
+  
+  $.ajax({
+    url: enteredUrl() + "/httpAuth/app/rest/projects",
+    headers: { Accept:"application/json", Authorization: "Basic " + enteredCreds() },
+  }).done(projectsCallback);
 }
 
 var credsCallback = function(a,b,c) {
   if (b == "success") {
     updateCredsStatus("Credentials are good!");
     $("#saveDiv").show();
-    $("#saveServerBtn").focus();
+    $("#chooseProjectsBtn").focus();
   } else {
     updateCredsStatus("Credentials incorrect");
   }
