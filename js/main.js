@@ -4,6 +4,7 @@ var greenMessage;
 var showNeverRunBuilds;
 var showMutedBuilds;
 var showAgents;
+var server;
 
 var refreshAgents = true;
 var refreshBuilds = true;
@@ -17,6 +18,12 @@ var start = function(items) {
   applyShowMuted(items.showMuted);
   applyBuildRefreshRate(items.refreshRate);
   applySuccessMessage(items.successMessage);
+  
+  for (index in items.servers) {
+    if (tcUrl == items.servers[index].url) {
+      server = items.servers[index];
+    }
+  }
   
   downloadAndDisplayBuilds();
 }
@@ -96,4 +103,13 @@ var prepareDOM = function() {
 };
 
 prepareDOM();
-loadConfig(start);
+
+// TODO solve auth problem - when logged out the monitor doesnt work, but loading the projects does
+// This is here to try and replicate the working call before startingu p the monitor  - thus auth should not be an issue on load
+
+// $.ajax({
+//   url: tcUrl + "/httpAuth/app/rest/projects",
+//   headers: { Accept:"application/json", Authorization: "Basic " + tcCreds },
+// }).done(function() {
+     loadConfig(start);
+// });

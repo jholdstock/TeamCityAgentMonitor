@@ -5,12 +5,12 @@ hideAll();
 
 loadConfig(function(items) {
 	servers = items.servers;
-  $('#refreshRate').val(items.refreshRate);
-  $('#successMessage').val(items.successMessage);
-  $('#hideCursor').prop("checked", items.hideCursor);
-  $('#showAgents').prop("checked", items.showAgents);
-  $('#showNeverRun').prop("checked", items.showNeverRun);
-  $('#showMuted').prop("checked", items.showMuted);
+	$('#refreshRate').val(items.refreshRate);
+	$('#successMessage').val(items.successMessage);
+	$('#hideCursor').prop("checked", items.hideCursor);
+	$('#showAgents').prop("checked", items.showAgents);
+	$('#showNeverRun').prop("checked", items.showNeverRun);
+	$('#showMuted').prop("checked", items.showMuted);
 	showServerList();
 });
 
@@ -44,7 +44,7 @@ var showServerList = function() {
 		var viewBtn = $("<td>").append(
 			$("<button>")
 				.text("View")
-				.click(serverButtonClick(server.url, server.creds))
+				.click(serverButtonClick(server))
 			);
 
 		var delBtn = $("<td>").append(
@@ -67,9 +67,9 @@ var showServerList = function() {
 	$("#serverList").show();
 }
 
-var serverButtonClick = function(url, creds) {
+var serverButtonClick = function(server) {
 	return function() {
-		chrome.extension.getBackgroundPage().openTab(url, creds);
+		chrome.extension.getBackgroundPage().openTab(server);
     	exit();
 	};
 }
