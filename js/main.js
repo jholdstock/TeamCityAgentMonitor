@@ -100,6 +100,10 @@ var prepareDOM = function() {
   var msg = $("<div>").addClass("tsm_init tsm_border").html("Getting build information<span class='dots'><span>.</span><span>.</span><span>.</span></span>");
   var pending = $("<div>").addClass("tsm_gray").attr("id", "tsm_build_init").append(msg);
   $("body").empty().append($("<div>").attr("id", "tsm_build_wrapper").append(pending));
+  var summaryWrapper = $("<div>").attr("id", "tsm_summary_wrapper");
+  var summary = $("<div>").addClass("tsm_summary");
+  summaryWrapper.append(summary);
+  $("body").append(summaryWrapper);
 };
 
 prepareDOM();

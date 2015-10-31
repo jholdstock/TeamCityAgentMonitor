@@ -14,6 +14,9 @@ var downloadAndDisplayBuilds = function() {
       receivedProjects++;
       if (receivedProjects >= server.projects.length) {
         expectedBuilds = buildTypes.length;
+        
+        updateSummary(expectedBuilds, server.projects.length);
+
         for (var i = 0; i < buildTypes.length; i++) {
           ajaxGet("/httpAuth/app/rest/builds/?locator=count:1,canceled:false,running:false,buildType:id:" + buildTypes[i].id, getBuildDetails(buildTypes[i]));
         }
@@ -22,6 +25,14 @@ var downloadAndDisplayBuilds = function() {
 
   }
 };
+
+var updateSummary = function(builds, projects) {
+  var summary = "Monitoring " + builds;
+  if (builds > 1) summary += " builds"; else summary += " build";
+  summary += " in " + projects;
+  if (projects > 1) summary += " projects"; else summary += " project";
+  $(".tsm_summary").html(summary);
+}
 
 var getBuildDetails = function(buildType) {
   return function(response) {

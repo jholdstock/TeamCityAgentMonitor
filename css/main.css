@@ -1,4 +1,4 @@
-html, body, #tsm_agent_wrapper, #tsm_build_wrapper {
+html, body, #tsm_agent_wrapper, #tsm_build_wrapper, #tsm_summary_wrapper {
   font-size       : 10px;
   background-color: #111;
   font-family     : sans-serif;
@@ -63,16 +63,29 @@ body {
   height        : 15%;
   flex-direction: row;  
 }
-
 #tsm_build_wrapper {
   display       : flex;
-  flex-grow     : 0.85;
-  height        : 85%;
+  flex-grow     : 0.80;
+  height        : 80%;
   flex-direction: column;  
 }
+#tsm_summary_wrapper {
+  display       : flex;
+  flex-grow     : 0.05;
+  height        : 5%;
+  flex-direction: row;  
+}
+
 /*
      Background divs
 */
+.tsm_summary {
+  width: 100%;
+  font-weight: 300;
+  text-align: center;
+  font-size: 2.5rem;
+  color: #bbb;
+}
 .tsm_green, .tsm_red, .tsm_orange, .tsm_gray {
   box-sizing   : border-box;
   padding      : 10px;
