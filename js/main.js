@@ -135,13 +135,4 @@ var prepareDOM = function() {
 };
 
 prepareDOM();
-
-// TODO solve auth problem - when logged out the monitor doesnt work, but loading the projects does
-// This is here to try and replicate the working call before startingu p the monitor  - thus auth should not be an issue on load
-
-// $.ajax({
-//   url: tcUrl + "/httpAuth/app/rest/projects",
-//   headers: { Accept:"application/json", Authorization: "Basic " + tcCreds },
-// }).done(function() {
-     loadConfig(start);
-// });
+loadConfig(start);
