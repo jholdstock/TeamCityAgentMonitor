@@ -3,13 +3,12 @@ var agentRefreshRate = 5000;
 var greenMessage;
 var showNeverRunBuilds;
 var showMutedBuilds;
-var showingAgents;
 var server;
 
 var refreshAgents = true;
 var refreshBuilds = true;
 //refreshAgents = false;
-//refreshBuilds = false;
+// refreshBuilds = false;
 
 var start = function(items) {
   applyHideCursor(items.hideCursor);
@@ -39,19 +38,19 @@ var applyBuildRefreshRate = function(refreshRate) {
 
 var applyShowAgents = function(newShowAgents) {
 
-// TODO THIS STILL DOESNT WORK!! HIDE MUTED FAILURES FOR EXAMPLE
+  if (newShowAgents) {
+	if ($("#tsm_agent_wrapper").length == 0) {
+	    var msg = $("<div>").addClass("tsm_init tsm_border").html("Getting agent information<span class='dots'><span>.</span><span>.</span><span>.</span></span>");
+	    var pending = $("<div>").addClass("tsm_gray").attr("id", "tsm_agent_init").append(msg);
 
-  if (newShowAgents && !showingAgents) {
-    var msg = $("<div>").addClass("tsm_init tsm_border").html("Getting agent information<span class='dots'><span>.</span><span>.</span><span>.</span></span>");
-    var pending = $("<div>").addClass("tsm_gray").attr("id", "tsm_agent_init").append(msg);
-
-    $("#tsm_build_wrapper").before($("<div>").attr("id", "tsm_agent_wrapper").append(pending));
-    downloadAndDisplayAgents();
-  }
+	    $("#tsm_build_wrapper").before($("<div>").attr("id", "tsm_agent_wrapper").append(pending));
+	    downloadAndDisplayAgents();
+	    return;
+	  }
+	}
   else {
     $("#tsm_agent_wrapper").remove();
   }
-  showingAgents = newShowAgents;
 }
 
 var applyShowNeverRun = function(showNeverRun) {

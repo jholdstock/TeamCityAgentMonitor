@@ -4,7 +4,7 @@ var downloadAndDisplayAgents = function() {
     for (var i = 0; i < agentIds.length; i++) {
       ajaxGet(agentIds[i].href, agentCallback);
     }
-    if (showingAgents & refreshAgents & !handlingError) {
+    if ($("#tsm_agent_wrapper").length > 0 && refreshAgents && !handlingError) {
       setTimeout(downloadAndDisplayAgents, agentRefreshRate);
     }
   });
