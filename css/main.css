@@ -84,15 +84,24 @@ body {
 #tsm_clock {
   text-align: right;
 }
+#tsm_url {
+  text-align: center;
+  color: #ddd;
+}
 #tsm_summary {
   text-align: left;
 }
 .tsm_summary_text {
-  padding    : 0 2rem;
-  width      : 100%;
-  font-weight: 300;
-  font-size  : 2.5rem;
-  color      : #bbb;
+    box-sizing    : border-box;
+    border-radius : 10px;  
+    padding       : 0 2rem;
+    width         : 100%;
+    font-weight   : 300;
+    font-size     : 2.5rem;
+    width         : 100%;
+    color         : #bbb;
+    vertical-align: middle;
+
 }
 .tsm_green, .tsm_red, .tsm_orange, .tsm_gray {
   box-sizing   : border-box;

@@ -38,7 +38,10 @@ var applyBuildRefreshRate = function(refreshRate) {
 }
 
 var applyShowAgents = function(newShowAgents) {
-  if (newShowAgents & !showingAgents) {
+
+// TODO THIS STILL DOESNT WORK!! HIDE MUTED FAILURES FOR EXAMPLE
+
+  if (newShowAgents && !showingAgents) {
     var msg = $("<div>").addClass("tsm_init tsm_border").html("Getting agent information<span class='dots'><span>.</span><span>.</span><span>.</span></span>");
     var pending = $("<div>").addClass("tsm_gray").attr("id", "tsm_agent_init").append(msg);
 
@@ -126,7 +129,8 @@ var prepareDOM = function() {
   var summaryWrapper = $("<div>").attr("id", "tsm_summary_wrapper");
   var summary = $("<div>").attr("id", "tsm_summary").addClass("tsm_summary_text");
   var clock = $("<div>").attr("id", "tsm_clock").addClass("tsm_summary_text");
-  summaryWrapper.append(summary).append(clock);
+  var url = $("<div>").attr("id", "tsm_url").html(tcUrl).addClass("tsm_summary_text");
+  summaryWrapper.append(summary).append(url).append(clock);
   $("body").append(summaryWrapper);
 };
 
