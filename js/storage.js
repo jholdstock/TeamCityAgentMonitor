@@ -6,7 +6,7 @@ function loadConfig(callback) {
   chrome.storage.local.get({
 	servers       : [],
 	refreshRate   : 15,
-	successMessage: "Everything is passing",
+	successMessage: "All builds are passing",
 	hideCursor    : false,
 	showAgents    : true,
 	showNeverRun  : true,
