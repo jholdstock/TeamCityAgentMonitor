@@ -134,18 +134,9 @@ body {
 /*
      Text divs
 */
-
-#tsm_success_msg, #tsm_success_time {
-  text-align: center;
-}
-
 #tsm_success_msg {
+  text-align: center;
   font-size: 4.5rem;
-}
-
-#tsm_success_time {
-  font-size: 3.0rem;
-  opacity  : 0.5;
 }
 
 .tsm_topRight, .tsm_topLeft, .tsm_bottomLeft, .tsm_bottomRight {
