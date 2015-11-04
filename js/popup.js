@@ -68,12 +68,12 @@ var showServerList = function() {
 }
 
 var serverButtonClick = function(server) {
-	$.ajax({
-	  url: server.url + "/httpAuth/app/rest/projects",
-	  headers: { Accept:"application/json", Authorization: "Basic " + server.creds },
-	  async: false,
-	});
 	return function() {
+		$.ajax({
+			url: server.url + "/httpAuth/app/rest/projects",
+			headers: { Accept:"application/json", Authorization: "Basic " + server.creds },
+			async: false,
+		});
 		chrome.extension.getBackgroundPage().openTab(server);
     	exit();
 	};
