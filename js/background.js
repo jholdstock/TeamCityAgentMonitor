@@ -10,6 +10,7 @@ var openTab = function(server) {
 	chrome.tabs.executeScript(null, {file: "js/time-interval.js"});
 	chrome.tabs.executeScript(null, {file: "js/teamcity-date.js"});
 	chrome.tabs.executeScript(null, {file: "js/agent-updates.js"});
+	chrome.tabs.executeScript(null, {file: "js/date-time-formatter.js"});
 	chrome.tabs.executeScript(null, {file: "js/drawing.js"});
 	chrome.tabs.executeScript(null, {file: "js/build.js"});
 	chrome.tabs.executeScript(null, {file: "js/build-updates.js"});

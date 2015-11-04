@@ -3,7 +3,7 @@ var now  = new Date(2014, 0, 10, 18, 30, 0, 0);
 var test_getElapsedTime = function(then, expected, assert) {
 	var ti = new TimeInterval(now, then);
 	var actual = ti.getElapsedTime();
-  assert.equal(actual, expected);
+  	assert.equal(actual, expected);
 }
 
 QUnit.test("TimeInterval : getElapsedTime : Less than a minute", function(assert) {

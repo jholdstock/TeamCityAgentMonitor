@@ -1,17 +1,11 @@
 function TimeInterval(now, then) {
   this.now = now;
   this.then = then;
-  this.monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
   this.getFailureDateTime = function() {
-    var sMonth = this.monthNames[then.getMonth()];
-    var finishDate = this.then.getDate() + " " + sMonth + " " + this.then.getFullYear();
-
-    var hours = ("0" + this.then.getHours()).slice(-2);
-    var minutes = ("0" + this.then.getMinutes()).slice(-2);
-    var finishTime = hours + ":" + minutes;
-
-    return "Failed on " + finishDate + " at " + finishTime;
+    var f = new DateTimeFormatter(this.then);
+    
+    return "Failed on " + f.getDate() + " at " + f.getTime();
   }
 
   this.getElapsedTime = function() {
