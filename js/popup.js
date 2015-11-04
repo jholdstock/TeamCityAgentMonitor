@@ -81,9 +81,11 @@ var serverButtonClick = function(server) {
 
 var deleteButtonClick = function(servers, i) {
 	return function() {
-		servers = servers.splice(i, 1);
-		saveConfig({servers:servers}, function() {});
-		showServerList();
+		if (confirm("Delete " + servers[i].url + "?")) {
+			servers = servers.splice(i, 1);
+			saveConfig({servers:servers}, function() {});
+			showServerList();
+		}
 	};
 }
 
