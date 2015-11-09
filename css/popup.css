@@ -53,3 +53,15 @@ td.serverName {
   font-weight: 600;
   color: green;
 }
+
+#projectCheckboxes div {
+  margin-left:0;
+  padding-left:30px;
+}
+
+#projectCheckboxes div label {
+  border: 1px solid #ccc;
+  border-width: 0 0 1px 1px;
+  border-radius: 0 0 0 10px;
+  padding-left: 1rem;
+}
