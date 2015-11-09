@@ -43,23 +43,36 @@
 		</div>
 
 		<div id="settings">
-			<h3>Settings</h3>
-			<br/>
-			<label for="refreshRate">Refresh rate (seconds):</label>&nbsp;<input type="text" size="3" id="refreshRate" />
+			<div>
+				<label for="successMessage">Success message:</label>
+				<input type="text" size="44" id="successMessage" />
+			</div>
+			<div>
+				<label for="refreshRate">Refresh rate (seconds):</label>
+				<input type="text" size="2" id="refreshRate" />
+			</div>
+			<div>
+				<input type="checkbox" id="hideCursor" />
+				<label for="hideCursor">Hide cursor</label>
+			</div>
+			<div>
+				<input type="checkbox" id="showNeverRun" />
+				<label for="showNeverRun">Show builds never run</label>
+			</div>
+			<div>
+				<input type="checkbox" id="showMuted" />
+				<label for="showMuted">Show muted failures</label>
+			</div>
+			<div>
+				<input type="checkbox" id="showAgents" />
+				<label for="showAgents">Show agent(s)</label>
+			</div>
 			<br />
-			<label for="successMessage">Success message:</label>&nbsp;<input type="text" id="successMessage" />
-			<br />
-			<label for="hideCursor">Hide cursor:</label>&nbsp;<input type="checkbox" id="hideCursor" />
-			<br />
-			<label for="showNeverRun">Show builds never run:</label>&nbsp;<input type="checkbox" id="showNeverRun" />
-			<br />
-			<label for="showMuted">Show muted failures:</label>&nbsp;<input type="checkbox" id="showMuted" />
-			<br />
-			<label for="showAgents">Show agent(s):</label>&nbsp;<input type="checkbox" id="showAgents" />
-			<br/>
-			<br/>
-			<button id="saveSettingsBtn">Save</button>&nbsp;&nbsp;<button class="showServersBtn">Cancel</button> 
-			<label for"saveSettingsBtn" id="saveSettingsStatus"></label>
+			<div>
+				<button id="saveSettingsBtn">Save</button>
+				<button class="showServersBtn">Cancel</button> 
+				<span id="saveSettingsStatus">Saved</span>
+			</div>
 		</div>		
 
 		<script src="../vendor/jquery-1.11.1.min.js"></script>

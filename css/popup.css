@@ -8,6 +8,10 @@ body {
   min-width: 25rem;
 }
 
+label {
+  font-weight: 500;
+}
+
 h3 {
   margin     : 0;
   font-weight: 600;
@@ -37,4 +41,15 @@ td.serverName {
   margin     : 1.0rem 0;
   font-weight: bold;
   color      : red;
+}
+
+#projectList {
+  width: 450px;
+}
+
+#saveSettingsStatus {
+  display: none;
+  padding-left: 2rem;
+  font-weight: 600;
+  color: green;
 }

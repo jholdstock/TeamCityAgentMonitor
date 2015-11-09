@@ -8,11 +8,11 @@ $('#saveSettingsBtn').on('click', function() {
     showMuted     : $('#showMuted').prop("checked"),
   }, function() {
     var status = $('#saveSettingsStatus');
-    status.html("<br />Saved.");
+    status.show();
     var button = $("#saveSettingsBtn");
     button.prop("disabled", true);
     setTimeout(function() {
-      status.html('');
+      status.hide();
       button.prop("disabled", false);
     }, 1000);
   });
