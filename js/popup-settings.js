@@ -8,13 +8,15 @@ $('#saveSettingsBtn').on('click', function() {
     showMuted     : $('#showMuted').prop("checked"),
   }, function() {
     var status = $('#saveSettingsStatus');
-    status.show();
     var button = $("#saveSettingsBtn");
     button.prop("disabled", true);
-    setTimeout(function() {
-      status.hide();
-      button.prop("disabled", false);
-    }, 1000);
+
+    status.fadeIn(300, function() {
+      status.fadeOut(300, function() {
+        button.prop("disabled", false);
+      });
+    });
+
   });
 });
 
