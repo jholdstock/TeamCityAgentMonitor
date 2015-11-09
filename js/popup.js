@@ -103,7 +103,7 @@ var showAddServer = function() {
 }
 
 var hideSaveButtonAndTestStatusAndCredentials = function() {
-	$("#saveDiv").hide();
+	$("#chooseProjectsBtn").hide();
 	$("#credsDiv").hide();
 	updateTestStatus("");
 	updateCredsStatus("");
@@ -124,5 +124,5 @@ $("#test").click(testConnection);
 $("#allBtn").click(allBtnClicked);
 $("#noneBtn").click(noneBtnClicked);
 $("#url").keydown(urlInputChanged).change(urlInputChanged);
-$("#username").keydown(credsInputChanged).change(credsInputChanged);
-$("#password").keydown(credsInputChanged).change(credsInputChanged);
+$("#username").keydown(usernameInputChanged).change(usernameInputChanged);
+$("#password").keydown(passwordInputChanged).change(passwordInputChanged);

@@ -34,7 +34,8 @@ var projectsCallback = function(a,b,c) {
 	
 	loadFromStorage();
 
-	$("#projectList").css("width", "450px").show();
+	$("#projectList").show();
+	$("#saveProjectsBtn").focus();
 }
 
 var saveProjects = function() {

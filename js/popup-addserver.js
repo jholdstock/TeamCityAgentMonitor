@@ -6,7 +6,13 @@ var urlInputChanged = function() {
   }
 }
 
-var credsInputChanged = function() {
+var usernameInputChanged = function() {
+  if (enterPressed()) {
+    $("#password").focus();
+  }
+}
+
+var passwordInputChanged = function() {
   if (enterPressed()) {
     $("#checkCredsBtn").click();
   }
@@ -104,22 +110,26 @@ var chooseProjects = function() {
 }
 
 var credsCallback = function(a,b,c) {
+  $("#checkCredsBtn").attr("disabled", false);
+
   if (b == "success") {
     updateCredsStatus("Credentials are good!");
-    $("#saveDiv").show();
-    $("#chooseProjectsBtn").focus();
+    $("#chooseProjectsBtn").show().focus();
   } else {
     updateCredsStatus("Credentials incorrect");
   }
 }
 
 var checkCreds = function() {
+  $("#checkCredsBtn").attr("disabled", true);
   if (!$("#username").val()) {
     updateCredsStatus("Please enter a username"); 
+    $("#checkCredsBtn").attr("disabled", false);
     return;
   }
   if (!$("#password").val()) {
     updateCredsStatus("Please enter a password"); 
+    $("#checkCredsBtn").attr("disabled", false);
     return;
   }
 
