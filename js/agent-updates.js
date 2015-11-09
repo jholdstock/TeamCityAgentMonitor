@@ -1,5 +1,5 @@
 var downloadAndDisplayAgents = function() {
-  ajaxGet("/httpAuth/app/rest/agents", function(response) {
+  getAgents(function(response) {
     var agentIds = response.agent;
     for (var i = 0; i < agentIds.length; i++) {
       ajaxGet(agentIds[i].href, agentCallback);

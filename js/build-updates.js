@@ -9,7 +9,7 @@ var downloadAndDisplayBuilds = function() {
   receivedProjects = 0
   buildTypes = []
   for (index in server.projects) {
-    ajaxGet("/httpAuth/app/rest/buildTypes?locator=project:" + server.projects[index], function(response) {
+    getProject(server.projects[index], function(response) {
       buildTypes = buildTypes.concat(response.buildType);
       receivedProjects++;
       if (receivedProjects >= server.projects.length) {
@@ -18,7 +18,7 @@ var downloadAndDisplayBuilds = function() {
         updateSummary(expectedBuilds, server.projects.length);
 
         for (var i = 0; i < buildTypes.length; i++) {
-          ajaxGet("/httpAuth/app/rest/builds/?locator=count:1,canceled:false,running:false,buildType:id:" + buildTypes[i].id, getBuildDetails(buildTypes[i]));
+          getLatestBuild(buildTypes[i].id, getBuildDetails(buildTypes[i]));
         }
       }
     });
