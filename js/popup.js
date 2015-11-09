@@ -38,8 +38,7 @@ var showServerList = function() {
 	$.each(servers, function(index, server){
 		var name = $("<td>")
 			.addClass("serverName")
-			.text(server.url)
-			.append("&nbsp;&nbsp;&nbsp;");
+			.text(server.url);
 
 		var viewBtn = $("<td>").append(
 			$("<button>")
