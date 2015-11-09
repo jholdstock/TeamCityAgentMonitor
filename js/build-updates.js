@@ -9,7 +9,7 @@ var downloadAndDisplayBuilds = function() {
   receivedProjects = 0
   buildTypes = []
   for (index in server.projects) {
-    getProject(server.projects[index], function(response) {
+    getBuildTypesForProject(server.projects[index], function(response) {
       buildTypes = buildTypes.concat(response.buildType);
       receivedProjects++;
       if (receivedProjects >= server.projects.length) {

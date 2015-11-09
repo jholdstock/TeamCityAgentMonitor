@@ -9,10 +9,7 @@ var editButtonClick = function(servers, i) {
 		selectedServer = i;
 		editingExistingProjectPreferences = true;
 		
-		$.ajax({
-			url: servers[i].url + "/httpAuth/app/rest/projects",
-			headers: { Accept:"application/json", Authorization: "Basic " + servers[i].creds },
-		}).done(projectsCallback);
+		getProjects(servers[i].url, servers[i].creds, projectsCallback)
 	};
 }
 
