@@ -41,12 +41,3 @@ var attemptReconnect = function() {
     complete: testCallback
   });
 }
-
-var ajaxGet = function(url, callback) {
-  $.ajax({
-    url: tcUrl + url,
-    headers: { Accept:"application/json", Authorization: "Basic " + tcCreds },
-    success: callback,
-    error: ajaxError
-  });
-}

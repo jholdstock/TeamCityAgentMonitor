@@ -39,7 +39,7 @@ var getBuildDetails = function(buildType) {
     if (response.build && response.build[0]) {
       var mostRecentBuild = response.build[0];
       mostRecentBuild.buildType = buildType;
-      ajaxGet(mostRecentBuild.href, buildCallback);  
+      getFromUrl(mostRecentBuild.href, buildCallback);  
     }
     else {
       var neverRun = { neverRun: true, buildType: buildType };

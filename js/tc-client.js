@@ -2,6 +2,10 @@ var getAgents = function(callback) {
   ajaxGet("/httpAuth/app/rest/agents", callback);
 }
 
+var getFromUrl = function(url, callback) {
+  ajaxGet(url, callback);
+}
+
 var getBuildTypesForProject = function(projectId, callback) {
   ajaxGet("/httpAuth/app/rest/buildTypes?locator=project:" + projectId, callback);
 }
@@ -15,4 +19,13 @@ var getProjects = function(url, creds, callback) {
     url: url + "/httpAuth/app/rest/projects",
     headers: { Accept:"application/json", Authorization: "Basic " + creds },
   }).done(callback);
+}
+
+var ajaxGet = function(url, callback) {
+  $.ajax({
+    url: tcUrl + url,
+    headers: { Accept:"application/json", Authorization: "Basic " + tcCreds },
+    success: callback,
+    error: ajaxError
+  });
 }
