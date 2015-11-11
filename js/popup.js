@@ -80,8 +80,6 @@ var deleteButtonClick = function(servers, i) {
 	return function() {
 		if (confirm("Delete " + servers[i].url + "?")) {
 			servers.splice(i, 1);
-			console.log("Saving");
-			console.log(servers);
 			saveConfig({servers:servers}, function() {});
 			showServerList();
 		}
