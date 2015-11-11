@@ -68,13 +68,11 @@ var showServerList = function() {
 
 var serverButtonClick = function(server) {
 	return function() {
-		$.ajax({
-			url: server.url + "/httpAuth/app/rest/projects",
-			headers: { Accept:"application/json", Authorization: "Basic " + server.creds },
-			async: false,
+		var tc = new TeamCityClient(server.url, server.creds);
+		tc.getProjects(function() {
+			chrome.extension.getBackgroundPage().openTab(server);
+			exit();
 		});
-		chrome.extension.getBackgroundPage().openTab(server);
-    	exit();
 	};
 }
 
