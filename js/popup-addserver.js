@@ -31,7 +31,7 @@ var updateTestStatus = function(status) {
   $("#testStatus").html(status);
 }
 
-var testConnection = function(event) { 
+var checkEnteredUrl = function(event) { 
   if (!$("#url").val()) {
     updateTestStatus("Please enter a URL"); 
     return;

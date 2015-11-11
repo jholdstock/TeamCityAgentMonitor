@@ -6,7 +6,7 @@ var ajaxError = function() {
     $(this).unbind("ajaxStop");
     var whiteout = $("<div>").addClass("tsm_whiteout");
     var spinnerUrl = chrome.extension.getURL('img/spinner.gif');
-    var errorDiv = $("<div>").addClass("tsm_bigAlert").html("TeamCity at " + tcUrl + " is not available.<br /><br />Attempting reconnection<br /><img style='margin-top:1.2rem;' height='150px' width='150px' src='" + spinnerUrl + "'' />");
+    var errorDiv = $("<div>").addClass("tsm_bigAlert").html("TeamCity at " + tcUrl + " is not available.<br /><br />Attempting reconnection<br /><img src='" + spinnerUrl + "'' />");
     $("body").append(errorDiv).append(whiteout);
     attemptReconnect();
   })

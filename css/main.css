@@ -42,6 +42,12 @@ body {
   width           : 100%;
 }
 
+.tsm_bigAlert img {
+  margin-top: 1.2rem;
+  height    : 150px;
+  width     : 150px;
+}
+
 .tsm_bigAlert {
   text-align      : center;
   color           : white;

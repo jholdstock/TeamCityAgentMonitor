@@ -79,7 +79,9 @@ var serverButtonClick = function(server) {
 var deleteButtonClick = function(servers, i) {
 	return function() {
 		if (confirm("Delete " + servers[i].url + "?")) {
-			servers = servers.splice(i, 1);
+			servers.splice(i, 1);
+			console.log("Saving");
+			console.log(servers);
 			saveConfig({servers:servers}, function() {});
 			showServerList();
 		}
@@ -117,7 +119,7 @@ $("#chooseProjectsBtn").click(chooseProjects);
 $("#saveProjectsBtn").click(saveProjects);
 $("#checkCredsBtn").click(checkCreds);
 $("#settingsBtn").click(showSettings);
-$("#test").click(testConnection);
+$("#test").click(checkEnteredUrl);
 $("#allBtn").click(allBtnClicked);
 $("#noneBtn").click(noneBtnClicked);
 $("#url").keydown(urlInputChanged).change(urlInputChanged);
