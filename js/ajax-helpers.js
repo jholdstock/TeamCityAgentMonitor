@@ -35,9 +35,5 @@ var testCallback = function(a,b) {
 }
 
 var attemptReconnect = function() {
-  $.ajax({
-    url: tcUrl,
-    headers: { Accept:"application/json", Authorization: "Basic " + tcCreds },
-    complete: testCallback
-  });
+  tc.attemptReconnect(testCallback);
 }

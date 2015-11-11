@@ -1,36 +1,44 @@
 function TeamCityClient(tcUrl, tcCreds) {
-  this.tcUrl = tcUrl;
-  this.tcCreds = tcCreds;
+	this.tcUrl = tcUrl;
+	this.tcCreds = tcCreds;
 
-  this.getAgents = function(callback) {
-    this.ajaxGet("/httpAuth/app/rest/agents", callback);
-  }  
+	this.tcHeaders = { 
+		Accept:"application/json", 
+		Authorization: "Basic " + this.tcCreds
+	};
 
-  this.getFromUrl = function(url, callback) {
-    this.ajaxGet(url, callback);
-  }
+	this.getAgents = function(callback) {
+		this.ajaxGet("/httpAuth/app/rest/agents", callback);
+	}  
 
-  this.getBuildTypesForProject = function(projectId, callback) {
-    this.ajaxGet("/httpAuth/app/rest/buildTypes?locator=project:" + projectId, callback);
-  }
+	this.getFromUrl = function(url, callback) {
+		this.ajaxGet(url, callback);
+	}
 
-  this.getLatestBuild = function(buildTypeId, callback) {
-    this.ajaxGet("/httpAuth/app/rest/builds/?locator=count:1,canceled:false,running:false,buildType:id:" + buildTypeId, callback);
-  }
+	this.getBuildTypesForProject = function(projectId, callback) {
+		this.ajaxGet("/httpAuth/app/rest/buildTypes?locator=project:" + projectId, callback);
+	}
 
-  this.getProjects = function(callback) {
-    $.ajax({
-      url: this.tcUrl + "/httpAuth/app/rest/projects",
-      headers: { Accept:"application/json", Authorization: "Basic " + this.tcCreds },
-    }).done(callback);
-  }
+	this.getLatestBuild = function(buildTypeId, callback) {
+		this.ajaxGet("/httpAuth/app/rest/builds/?locator=count:1,canceled:false,running:false,buildType:id:" + buildTypeId, callback);
+	}
 
-  this.ajaxGet = function(url, callback) {
-    $.ajax({
-      url: this.tcUrl + url,
-      headers: { Accept:"application/json", Authorization: "Basic " + this.tcCreds },
-      success: callback,
-      error: ajaxError
-    });
-  }
+	this.getProjects = function(callback) {
+		this.ajax("/httpAuth/app/rest/projects").done(callback);
+	}
+
+	this.attemptReconnect = function(callback) {
+		this.ajax("").complete(callback);
+	}
+
+	this.ajaxGet = function(url, callback) {
+		this.ajax(url).success(callback).error(ajaxError);
+	}
+
+	this.ajax = function(url) {
+		return $.ajax({
+			url: this.tcUrl + url,
+			headers: this.tcHeaders,
+		});
+	}
 }

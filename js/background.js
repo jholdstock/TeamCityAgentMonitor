@@ -6,8 +6,8 @@ var openTab = function(server) {
 	chrome.tabs.executeScript(null, {file: "vendor/jquery-1.11.1.min.js"});
 	chrome.tabs.executeScript(null, {code: "var tcUrl = \"" + server.url + "\";"});
 	chrome.tabs.executeScript(null, {code: "var tcCreds = \"" + server.creds + "\";"});
-	chrome.tabs.executeScript(null, {file: "js/ajax-helpers.js"});
 	chrome.tabs.executeScript(null, {file: "js/tc-client.js"});
+	chrome.tabs.executeScript(null, {file: "js/ajax-helpers.js"});
 	chrome.tabs.executeScript(null, {file: "js/time-interval.js"});
 	chrome.tabs.executeScript(null, {file: "js/teamcity-date.js"});
 	chrome.tabs.executeScript(null, {file: "js/agent-updates.js"});
