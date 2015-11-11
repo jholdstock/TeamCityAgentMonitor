@@ -1,8 +1,9 @@
 var downloadAndDisplayAgents = function() {
-  getAgents(function(response) {
+  
+  tc.getAgents(function(response) {
     var agentIds = response.agent;
     for (var i = 0; i < agentIds.length; i++) {
-      getFromUrl(agentIds[i].href, agentCallback);
+      tc.getFromUrl(agentIds[i].href, agentCallback);
     }
     if ($("#tsm_agent_wrapper").length > 0 && refreshAgents && !handlingError) {
       setTimeout(downloadAndDisplayAgents, agentRefreshRate);

@@ -4,6 +4,7 @@ var greenMessage;
 var showNeverRunBuilds;
 var showMutedBuilds;
 var server;
+var tc;
 
 var refreshAgents = true;
 var refreshBuilds = true;
@@ -11,6 +12,8 @@ var refreshBuilds = true;
 // refreshBuilds = false;
 
 var start = function(items) {
+  tc = new TeamCityClient(tcUrl, tcCreds);
+
   applyHideCursor(items.hideCursor);
   applyShowAgents(items.showAgents);
   applyShowNeverRun(items.showNeverRun);
@@ -22,8 +25,8 @@ var start = function(items) {
     if (tcUrl == items.servers[index].url) {
       server = items.servers[index];
     }
-  }
-  
+ }
+
   downloadAndDisplayBuilds();
 }
 

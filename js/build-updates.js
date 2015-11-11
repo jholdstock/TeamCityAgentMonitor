@@ -9,7 +9,7 @@ var downloadAndDisplayBuilds = function() {
   receivedProjects = 0
   buildTypes = []
   for (index in server.projects) {
-    getBuildTypesForProject(server.projects[index], function(response) {
+    tc.getBuildTypesForProject(server.projects[index], function(response) {
       buildTypes = buildTypes.concat(response.buildType);
       receivedProjects++;
       if (receivedProjects >= server.projects.length) {
@@ -18,7 +18,7 @@ var downloadAndDisplayBuilds = function() {
         updateSummary(expectedBuilds, server.projects.length);
 
         for (var i = 0; i < buildTypes.length; i++) {
-          getLatestBuild(buildTypes[i].id, getBuildDetails(buildTypes[i]));
+          tc.getLatestBuild(buildTypes[i].id, getBuildDetails(buildTypes[i]));
         }
       }
     });
@@ -39,7 +39,7 @@ var getBuildDetails = function(buildType) {
     if (response.build && response.build[0]) {
       var mostRecentBuild = response.build[0];
       mostRecentBuild.buildType = buildType;
-      getFromUrl(mostRecentBuild.href, buildCallback);  
+      tc.getFromUrl(mostRecentBuild.href, buildCallback);  
     }
     else {
       var neverRun = { neverRun: true, buildType: buildType };

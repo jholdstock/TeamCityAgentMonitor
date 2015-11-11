@@ -9,7 +9,9 @@ var editButtonClick = function(servers, i) {
 		selectedServer = i;
 		editingExistingProjectPreferences = true;
 		
-		getProjects(servers[i].url, servers[i].creds, projectsCallback)
+		var tc = new TeamCityClient(servers[i].url, servers[i].creds);
+
+		tc.getProjects(projectsCallback)
 	};
 }
 
