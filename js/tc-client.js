@@ -2,9 +2,10 @@ function TeamCityClient(tcUrl, tcCreds) {
 	this.tcUrl = tcUrl;
 	this.tcCreds = tcCreds;
 
-	this.tcHeaders = { 
-		Accept:"application/json", 
-		Authorization: "Basic " + this.tcCreds
+	this.tcHeaders = { Accept:"application/json" };
+
+	if (this.tcCreds) {
+		this.tcHeaders.Authorization = "Basic " + this.tcCreds;
 	};
 
 	this.getAgents = function(callback) {

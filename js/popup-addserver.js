@@ -55,7 +55,7 @@ var checkEnteredUrl = function(event) {
   $("#url").attr("disabled", true);
   updateTestStatus("Connecting...");
 
-  var tc = new TeamCityClient(url, "");
+  var tc = new TeamCityClient(url);
   tc.testConnection(testCallback);
 }
 
