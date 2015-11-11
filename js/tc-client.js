@@ -27,7 +27,7 @@ function TeamCityClient(tcUrl, tcCreds) {
 		this.ajax("/httpAuth/app/rest/projects").done(callback);
 	}
 
-	this.attemptReconnect = function(callback) {
+	this.testConnection = function(callback) {
 		this.ajax("").complete(callback);
 	}
 

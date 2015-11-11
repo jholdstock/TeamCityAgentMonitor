@@ -35,5 +35,5 @@ var testCallback = function(a,b) {
 }
 
 var attemptReconnect = function() {
-  tc.attemptReconnect(testCallback);
+  tc.testConnection(testCallback);
 }

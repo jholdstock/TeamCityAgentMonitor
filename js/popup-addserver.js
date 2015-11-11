@@ -55,11 +55,8 @@ var testConnection = function(event) {
   $("#url").attr("disabled", true);
   updateTestStatus("Connecting...");
 
-  $.ajax({
-    url: url,
-    headers: { Accept:"application/json" },
-    complete: testCallback
-  });
+  var tc = new TeamCityClient(url, "");
+  tc.testConnection(testCallback);
 }
 
 var testCallback = function(a,b) {
@@ -103,10 +100,8 @@ var chooseProjects = function() {
   editingExistingProjectPreferences = false;
   $("#projectCheckboxes").empty();
   
-  $.ajax({
-    url: enteredUrl() + "/httpAuth/app/rest/projects",
-    headers: { Accept:"application/json", Authorization: "Basic " + enteredCreds() },
-  }).done(projectsCallback);
+  var tc = new TeamCityClient(enteredUrl(), enteredCreds());
+  tc.getProjects(projectsCallback);
 }
 
 var credsCallback = function(a,b,c) {
