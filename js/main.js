@@ -138,3 +138,27 @@ var prepareDOM = function() {
 
 prepareDOM();
 loadConfig(start);
+
+var down = true;
+var scrolling = function() {
+  if ($(".tsm_init").length) {
+    setTimeout(scrolling, 500);
+    return;
+  }
+  var bottom = $("#tsm_build_wrapper").prop('scrollHeight') - $("#tsm_build_wrapper").height();
+  var target;
+  if (down) {
+    target = bottom;
+  } else {
+    target = 0;
+  }
+  down = !down;
+  var duration = $("#tsm_build_wrapper > div").length * 900;
+  $("#tsm_build_wrapper").animate(
+      { scrollTop: target },
+      duration,
+      "swing",
+      scrolling
+  );
+};
+scrolling();
