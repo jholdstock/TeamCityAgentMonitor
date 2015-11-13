@@ -77,6 +77,10 @@ body {
   overflow-x    : hidden;  
   overflow-y    : auto;  
 }
+#tsm_build_wrapper > div {
+  min-height: 9rem;
+}
+
 #tsm_summary_wrapper {
   display       : flex;
   flex-grow     : 0.05;
