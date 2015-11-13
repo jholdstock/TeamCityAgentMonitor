@@ -75,7 +75,7 @@ body {
   height        : 80%;
   flex-direction: column;
   overflow-x    : hidden;  
-  overflow-y    : auto;  
+  overflow-y    : hidden;  
 }
 #tsm_build_wrapper > div {
   min-height: 9rem;
