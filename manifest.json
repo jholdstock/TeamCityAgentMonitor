@@ -4,7 +4,7 @@
   "name": "TeamCity Status Monitor",
   "short_name" : "TC StatusMon",
   "description": "TeamCity build status displayed in a big screen dashboard format",
-  "version": "2.0",
+  "version": "2.1",
 
   "author" : "Jamie Holdstock", 
 
