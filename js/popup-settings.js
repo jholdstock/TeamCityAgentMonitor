@@ -6,6 +6,7 @@ $('#saveSettingsBtn').on('click', function() {
     showAgents    : $('#showAgents').prop("checked"),
     showNeverRun  : $('#showNeverRun').prop("checked"),
     showMuted     : $('#showMuted').prop("checked"),
+    showSuccessful: $('#showSuccessful').prop("checked"),
   }, function() {
     var status = $('#saveSettingsStatus');
     var button = $("#saveSettingsBtn");

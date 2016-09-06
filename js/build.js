@@ -22,7 +22,7 @@ function Build(rawBuild) {
 			} 
 		} 
 
-		if (this.successful() == false) {
+		if (this.successful() == false || showSuccessfulBuilds) {
 			return true;
 		} else {
 			return false;
@@ -63,6 +63,8 @@ function Build(rawBuild) {
 			return "orange";
 		} else if (this.neverRun()) {
 			return "orange";
+		} else if(this.successful()) {
+			return "green";
 		} else {
 			return "red";
 		}

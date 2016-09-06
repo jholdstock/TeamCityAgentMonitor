@@ -11,5 +11,6 @@ function loadConfig(callback) {
 	showAgents    : true,
 	showNeverRun  : true,
 	showMuted     : true,
+	showSuccessful: false,
   }, callback);
 };
