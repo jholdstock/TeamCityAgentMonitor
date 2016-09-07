@@ -11,6 +11,7 @@ loadConfig(function(items) {
 	$('#showAgents').prop("checked", items.showAgents);
 	$('#showNeverRun').prop("checked", items.showNeverRun);
 	$('#showMuted').prop("checked", items.showMuted);
+	$('#showSuccessful').prop("checked", items.showSuccessful);
 	showServerList();
 });
 
